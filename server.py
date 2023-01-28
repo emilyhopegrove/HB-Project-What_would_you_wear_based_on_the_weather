@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 
 
-@app.route('/')
+@app.route('/homepage')
 def homepage():
     "look at the homepage"
 
@@ -28,7 +28,6 @@ def create_new_account():
     "look at the create new account page"
 
     return render_template("create-new-account.html")
-
 
 
 
