@@ -1,0 +1,53 @@
+<!-- This page will ask the user to login with their email and password
+it will offer them an option to create an account if they don't have one
+if the password or email is incorrect they will be prompted to try again
+
+inputs: user's email and password in text fields
+output: if valid, reroute to user's homepage
+if invalid, prompt for login information again
+offer user option to create a new account
+
+nice to have: forgot password feature
+
+email text box
+password box
+login button
+validation
+-->
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>
+            {% block title %}User Login Page{% endblock %}
+        </title>
+        {% block head %}{% endblock %}
+
+    </head>
+
+    <body>
+        <form>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+            <br>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <br>
+            <button onclick="validate()">Login</button>
+        </form>
+        <br>
+        <a href="create-new-account.html">Go here to create an account</a>
+        {%block after_body%}
+
+        <script>
+            function validate(){
+// need help with creating a validation function to check user input against database
+            }
+        </script>
+        {%endblock%}
+
+    </body>
+</html>

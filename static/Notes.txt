@@ -1,0 +1,46 @@
+what is dunder repr? (from the Model.py classes)
+__repr__ is a special method in Python 
+classes that is used to define a string representation of an object. 
+It is called when the built-in repr() function is used on an object of the class, 
+or when the object is output in an interactive session. 
+The method should return a string that, when passed to the eval() function, 
+would create an object that is equal to the original object. 
+It is used to provide developers with a way to unambiguously identify an instance of a class.
+
+
+wtwbotw = short hand for "what to wear based on the weather"
+
+#template below pulled from ratings lab notes used in model.py
+# https://fellowship.hackbrightacademy.com/materials/serft16/exercises/ratings-v2/
+
+# class User(db.Model):
+#     """A user."""
+
+#     __tablename__ = __blank__
+
+#     user_id = db.Column(db.__blank__,
+#                         autoincrement=__blank__,
+#                         primary_key=__blank__)
+#     email = db.Column(db.__blank__, unique=__blank__)
+#     password = db.Column(db.__blank__)
+
+#     def __repr__(self):
+#         return f'<User user_id={__blank__} email={__blank__}>'
+
+pulled from ratings model.py, used in model.py
+def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+    flask_app.config["SQLALCHEMY_ECHO"] = echo
+    flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    db.app = flask_app
+    db.init_app(flask_app)
+
+    print("Connected to the db!")
+
+
+
+note about base.html page:
+TF-8 is a character encoding standard for Unicode 
+and will ensure that any special characters in the HTML file will be interpreted correctly by the browser.
+
