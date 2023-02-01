@@ -1,60 +1,109 @@
-<!-- this page will be the landing page for if a user is new and needs to create an account
-they will input their email, password, user_name, and zip (must have a home zip, can add work zip or other zip)
-and will generate an autoincrementing user_id
-this will be stored in the database whatToWear
+<form class="needs-validation" novalidate>
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom01">First name</label>
+        <input type="text" class="form-control" id="validationCustom01" placeholder="First name" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
 
-upon successful completion the user will then route to their user-profile-page and will not see this page again
- -->
+      <br>
 
- <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>
-            {% block title %}Create New Account Page{% endblock %}
-        </title>
-        {% block head %}{% endblock %}
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom02">Last name</label>
+        <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
 
-    </head>
+      <br>
 
-    <body>
-        <form>
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required>
-            <br>
-            <br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-            <br>
-            <label for="user_name">User Name:</label>
-            <input type="text" id="user_name" name="user_name" required>
-            <br>
-            <br>
-            <label for="zip_home">Enter Home Zipcode (must be 5 digits):</label>
-            <input type="zip_home" id="zip_home" name="zip_home" required>
-            <br>
-            <br>
-            <label for="zip_work">Enter Work Zipcode (optional):</label>
-            <input type="zip_work" id="zip_work" name="zip_work">
-            <br>
-            <br>
-            <label for="zip_other">Enter Another Zipcode (optional):</label>
-            <input type="zip_other" id="zip_other" name="zip_other">
+      <div class="col-md-4 mb-3">
+        <label for="validationCustomUsername">Username</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupPrepend">@</span>
+          </div>
+          <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required>
+          <div class="invalid-feedback">
+            Please choose a username.
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
 
-            <button onclick="validate()">Login</button>
-        </form>
-        <br>
-        <!-- deal with this later when it makes sense -->
-        <!-- <a href="fixpassword">Go here to create a new password</a> -->
-        {%block after_body%}
+    <!-- <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="validationCustom03">City</label>
+        <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
+        <div class="invalid-feedback">
+          Please provide a valid city.
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationCustom04">State</label>
+        <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
+        <div class="invalid-feedback">
+          Please provide a valid state.
+        </div>
+      </div> -->
+      <div class="col-md-3 mb-3">
+        <label for="validationCustom05">Home Zip</label>
+        <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
+        <div class="invalid-feedback">
+          Please provide a valid zip where you live.
+        </div>
+      </div>
+    </div>
 
-        <script>
-            function validate(){
-//  need help with creating a validation function to check user input against database
-            }
-        </script>
-        {%endblock%}
+    <br>
 
-    </body>
-</html>
+    <div class="col-md-3 mb-3">
+        <label for="validationCustom05">Work Zip</label>
+        <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
+        <div class="invalid-feedback">
+          Please provide a valid zip where you work.
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+        <label class="form-check-label" for="invalidCheck">
+          Agree to terms and conditions
+        </label>
+        <div class="invalid-feedback">
+          You must agree before submitting.
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit form</button>
+    <p id="fuckme"></p>
+  </form>
+  
+  <script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>

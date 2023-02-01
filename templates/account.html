@@ -1,8 +1,21 @@
 <!-- this page will display the user's profile information including their email, username, password, option to change
 these things and up to 3 preferred zip/locations to save their home, work and other regular location for ease of use-->
 
+{% extends 'base.html' %}
+
+{% block content %}
 
 
-<h2>Navigation</h2>
+<h2>User Account</h2>
+<h3>On this page you'll see the user's profile information, including...</h3>
+
 <ul>
-    <li><a href='/homepage'> Go back home</a></li>
+    <li>email </li>
+    <li>username </li>
+    <li>option to change password </li>
+    <li>home zip </li>
+    <li>work zip </li>
+    <li>other saved zips </li>
+</ul>
+
+{% endblock %}

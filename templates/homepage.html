@@ -2,21 +2,130 @@
 
 {% block title %}Welcome to your homepage!{% endblock %}
 
-{% block body %}
-<h1>Welcome!</h1>
+{% block content %}
 
-<h2>Navigation</h2>
-<ul>
+<h1>Homepage</h1>
+<!-- allow user to navigate to their user account -->
+<!-- <ul>
     <li><a href='/account'> User Account</a></li>
-</ul>
-
+</ul> -->
+<br>
 <h3>Someday this page will show cool things including:</h3><br>
-<ul>your favorite outfits</ul><br>
-<ul>your home and work location's expected forcast for the day</ul><br>
+
+<ul>your home and work location's expected forcast for the day <br>
+    including high and low temps, and precipitation predicions</ul><br>
+<!-- insert api forcast data here -->
+<h4>Today's high: </h4>
+<h4>Today's low: </h4>
+<h4>Today's chance of precipitation: </h4>
+
+<!-- create an engine to display the outfits to wear based on the conditions above -->
+
+function 
+if (temp === "hot" && precipitation == false) {
+  document.getElementById("hotOutfit").innerHTML = `
+  <h1>It's hot out today!</h1>
+  <div>
+    <!-- Top, bottom, footwear for hot weather -->
+    <p>Today you should wear:</p>
+    <li>T-Shirt</li>
+    <li>Shorts</li>
+    <li>Sandals</li>
+  </div>
+  `;
+  } else if (temp === "hot" && precipitation == true) {
+    document.getElementById("hotOutfit").innerHTML = `
+    <h1>It's hot out today!</h1>
+    <div>
+    <!-- Top, bottom, footwear for hot rainy weather -->
+      <p>Today you should wear:</p>
+      <li>T-Shirt</li>
+      <li>Shorts</li>
+      <li>Sandals</li>
+      <!-- Accessories -->
+      <p>Accessories you may want to bring with you:</p>
+      <li>Umbrella</li>
+    </div>
+    `;
+    }else if (temp === "cold" && precipitation == false) {
+  document.getElementById("coldOutfit").innerHTML = `
+  <h1>It's cold out today!</h1>
+  <div>
+    <p>Today you should wear:</p>
+    <li>Hoodie</li>
+    <li>Jeans</li>
+    <li>Tennis Shoes</li>
+  </div>
+  `;
+  } else if (temp === "hot" && precipitation == true) {
+    document.getElementById("hotWetOutfit").innerHTML = `
+    <h1>It's hot out today!</h1>
+    <div>
+    <!-- Top, bottom, footwear for hot rainy weather -->
+      <p>Today you should wear:</p>
+      <li>T-Shirt</li>
+      <li>Shorts</li>
+      <li>Sandals</li>
+      <!-- Accessories -->
+      <p>Accessories you may want to bring with you:</p>
+      <li>Umbrella</li>
+    </div>
+    `;
+    }else if (temp === "cold" && precipitation == false) {
+  document.getElementById("coldDryOutfit").innerHTML = `
+  <h1>It's cold out today!</h1>
+  <div>
+    <p>Today you should wear:</p>
+    <li>Hoodie</li>
+    <li>Jeans</li>
+    <li>Tennis Shoes</li>
+  </div>
+  `;
+  }else if (temp === "warm") {
+    document.getElementById("coldOutfit").innerHTML = `
+    <h1>It's warm out today!</h1>
+    <div>
+        <p>Today you should wear:</p>
+        <li>T-Shirt</li>
+        <li>Jeans</li>
+        <li>Tennis Shoes</li>
+
+    </div>
+    `;
+    }
+
+  <!-- // make some mock data, like tits above, and that drives conditions
+  // the conditions are if/elses that are determine what to wear based on mock data
+  // you need to think about the data structure to use for showing random clothing shit
+  // see white board for some basic shit/ideas -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  -->
 <ul>your current outfit suggestion for what to wear based on the weather</ul><br>
+<!-- insert api data here -->
+<ul>your favorite outfits</ul><br>
+<!--fave outfits will be 3.0+ -->
+
 <ul>You may even be able to load up pictures of your actual wardrobe <br>
     and have those display to you as a suggested outfit</ul><br>
+<!-- post course work maybe -->
 <ul> I can even bet that you will be able to hire a personal stylist and buy clothing items</ul><br>
+<!-- post course work maybe -->
 <ul> And heck, maybe there will be some content for you to read.</ul><br>
 <ul> But we'll see. We shall see...</ul>
 {% endblock %}

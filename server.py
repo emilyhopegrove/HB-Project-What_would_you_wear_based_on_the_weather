@@ -4,8 +4,8 @@
 from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db
 import crud
-
 from jinja2 import StrictUndefined
+import requests
 
 app = Flask(__name__)
 
@@ -29,6 +29,11 @@ def create_new_account():
 
     return render_template("create-new-account.html")
 
+
+# post method zip code form submission, user inputs zip, click submit, hit end point, endpoint grabs zipcode entered
+# (look up examples)
+#enter zip into api call, return data from api
+#figure out what information I want to extract, set new variables to represent the temp and precip
 
 
 
