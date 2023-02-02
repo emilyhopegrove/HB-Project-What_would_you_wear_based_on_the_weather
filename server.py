@@ -1,6 +1,7 @@
 #pulled from ratings app server.py
-"""Server for wtwbotw app."""
 
+"""Server for wtwbotw app."""
+import os
 from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db
 import crud
@@ -13,13 +14,15 @@ app = Flask(__name__)
 
 @app.route('/homepage')
 def homepage():
-    "look at the homepage"
-
+    "look at the homepage - display the outfit based on weather condition"
+    geocode_url = 'http://api.openweathermap.org/geo/1.0/zip'
+    #make the api key super duper safe
+    api_key = os.environ['api_key']
     return render_template("homepage.html")
 
 @app.route('/account')
 def account():
-    "look at the user's account page"
+    "look at the user's account page - user puts in their information"
 
     return render_template("account.html")
 
