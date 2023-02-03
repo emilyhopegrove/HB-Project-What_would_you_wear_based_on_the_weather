@@ -126,10 +126,10 @@ hotWetOutfit = {
 }
 #cold outfits
 coldOutfit = {
-    "top": "T-shirt"
+    "top": "T-shirt",
     "sweater": "Hoodie",
     "bottom": "Jeans",
-    "footwear": "Tennis shoes",
+    "footwear": "Tennis shoes"
 }
 
 coldWetOutfit = {
@@ -142,7 +142,7 @@ coldWetOutfit = {
 warmOutfit = {
     "top": "T-Shirt",
     "bottom": "Jeans",
-    "footwear": "Tennis shoes",
+    "footwear": "Tennis shoes"
 }
 
 warmWetOutfit = {
@@ -155,7 +155,7 @@ warmWetOutfit = {
 freezingOutfit = {
     "top": "T-Shirt",
     "sweater": "Hoodie",
-    "outerwear": "Coat"
+    "outerwear": "Coat",
     "bottom": "Jeans",
     "footwear": "Boots",
     "Accessories": "Hat, glove and scarf"
@@ -179,11 +179,11 @@ freezingOutfit = {
 # 32 - = "freezing" (sweater= hoodie)(outerwear = coat)
 
     # create a set (cold, hot) (since the day may start cold then get warm, or vice versa) x
-    # where does the high temp fall (pop into set) x ('pop' into set? doesn't pop() take things out?)
-    # where does the low temp fall in a set (pop into set) x
-    # set will have 1 or 2 items but never more, only accounting for high and low temps (NOT CERTAIN ABOUT THIS PART)
+    # where does the high temp fall (put it into set) x 
+    # where does the low temp fall in a set (put it into set) x
+    # set will have 1 or 2 items but never more, only accounting for high and low temps (see pseudo below)
 
-#check temp and figure out what word to ascribe to it 
+#check temp and figure out what word to ascribe to it X
 #example: if temp is 60 degrees
     #if temp >= 80, 
     #put the word 'hot' into the set 
@@ -198,30 +198,30 @@ freezingOutfit = {
 #take the warmest rating in set and fill a garments dict (made a dictionary above for outfits)
 
 #find the hottest word in set, check what the hottest word is, then add its clothing into the dictionary
-#if there is one word in the set, do the below (handles the case when temps are in the same range, a consistent day)
-#if tempWord = 'hot'
-#add hotOutfit to garments
-#elif tempWord = 'warm'
-#add warmOutfit to garments
-#elif tempWord = 'cold'
-#add coldOutfit to garments
-#elif tempWord = 'freezing'
-#add freezingOutfit to garments
+    #if there is one word in the set, do the below (handles the case when temps are in the same range, a consistent day)
+        #if tempWord = 'hot'
+            #add hotOutfit to garments
+        #elif tempWord = 'warm'
+            #add warmOutfit to garments
+        #elif tempWord = 'cold'
+            #add coldOutfit to garments
+        #elif tempWord = 'freezing'
+            #add freezingOutfit to garments
 
 #element in set (syntax for word in set)
-#if there is 2 words in the set
-#if "hot" in temps_for_day:
-    #put the  corresponding outfit pieces from the hotOutfit into garments object 
-        #then take that word 'hot' and toss it out the window
-#if 'warm' in temps_for_day:
-    #put the corresponding outfit pieces from the warmOutfit into garments object 
-        #then take that word 'warm' and toss it out the window
-#if 'cold' in temps_for_day:
-    #put the corresponding outfit pieces from the coldOutfit into garments object 
-        #then take that word 'cold' and toss it out the window
-#if 'freezing' in temps_for_day:
-    #put the corresponding outfit pieces from the freezingOutfit into garments object 
-        #then take that word 'freezing' and toss it out the window
+#if there are 2 words in the set
+    #if "hot" in temps_for_day:
+        #put the  corresponding outfit pieces from the hotOutfit into garments object 
+            #then take that word 'hot' and toss it out the window
+    #if 'warm' in temps_for_day:
+        #put the corresponding outfit pieces from the warmOutfit into garments object 
+            #then take that word 'warm' and toss it out the window
+    #if 'cold' in temps_for_day:
+        #put the corresponding outfit pieces from the coldOutfit into garments object 
+            #then take that word 'cold' and toss it out the window
+    #if 'freezing' in temps_for_day:
+        #put the corresponding outfit pieces from the freezingOutfit into garments object 
+            #then take that word 'freezing' and toss it out the window
     
 #add missing keys into the garments object (such as if there's no sweater)
 #save final word to a variable (ie 'second_temp')
@@ -242,16 +242,127 @@ freezingOutfit = {
 #end of all this pseudo, garments dictionary has the completed outfit for the day huzzah
 #(note things will get nested, take it slow, write the if/else, use pass keyword, lots of levels of indentation )
 
-#input: 
-#output: garments dictionary with outfit items
-temps_for_day = set()
-garments = {}
-#handle for if 2 words in set
-if True:
-    pass
+
+#attempt 1:
+# def setGenerator(temperature):
+#     temps_for_day = set()
+    
+#     #place 1 word in set based on temps
+#     #based on word in set, put corresponding outfit into garments dictionary
+#     if temperature >= 80: 
+#         #put the word 'hot' into the set 
+#         temps_for_day.add('hot')
+        
+#     elif temperature >= 56:
+#         #put the word 'warm' into the set
+#         temps_for_day.add('warm')
+        
+#     elif temperature >= 33:
+#         #put the word 'cold' into the set
+#         temps_for_day.add('cold')
+        
+#     else:
+#         #put the word 'freezing' into the set
+#         temps_for_day.add('freezing')
+    
+
+#     #handle for if 2 words in set. 
+#     if 'hot' in temps_for_day:
+#         pass
+#     else:
+#         pass
+
+
+
+
+#ASK TREW WHY temps_for_day IS UNDERLINED BELOW SINCE THERE'S A SET NAMED THAT WHAT THE WHAT
+#takes in the temperature as pulled from the api, and precipitation is defaulted to false
+def recommendOutfit(temperature, precip=False):
+# create a set to store the rating of the temperature
+    temps_for_day = set()
+    # categorize the temperature into hot, warm, cold, or freezing
+if temperature >= 80:
+    temps_for_day.add('hot')
+elif temperature >= 56:
+    temps_for_day.add('warm')
+elif temperature >= 33:
+    temps_for_day.add('cold')
 else:
-    pass
-#handle for 1 word in set
+    temps_for_day.add('freezing')
+    
+# print the temperature category to check the correctness of temperature categorization
+#print(f"Temperature category: {temps_for_day}")
+
+# create a dictionary to store the outfit for the day
+garments = {}
+
+# get the outfit based on the temperature (handle for 1 temp in set)
+if len(temps_for_day) == 1:
+    # if there is only one temperature rating, add the corresponding outfit to the garments dictionary
+    temp_word = list(temps_for_day)[0]
+    if temp_word == 'hot':
+        garments.update(hotOutfit)
+    elif temp_word == 'warm':
+        garments.update(warmOutfit)
+    elif temp_word == 'cold':
+        garments.update(coldOutfit)
+    elif temp_word == 'freezing':
+        garments.update(freezingOutfit)
+else:
+    # if there are two temperature ratings, add the corresponding outfit to the garments dictionary and remove the used rating from the set
+    if 'hot' in temps_for_day:
+        garments.update(hotOutfit)
+        temps_for_day.remove('hot')
+    if 'warm' in temps_for_day:
+        garments.update(warmOutfit)
+        temps_for_day.remove('warm')
+    if 'cold' in temps_for_day:
+        garments.update(coldOutfit)
+        temps_for_day.remove('cold')
+    if 'freezing' in temps_for_day:
+        garments.update(freezingOutfit)
+        temps_for_day.remove('freezing')
+        
+# print the updated garment items to check the correctness of garment items assignment
+#print(f"Garment items: {garments}")
+
+# get the second highest temperature rating
+second_temp = list(temps_for_day)[0]
+
+# add missing items to the outfit based on the second highest temperature rating
+if second_temp == 'warm':
+    outfit_to_check = warmOutfit
+elif second_temp == 'cold':
+    outfit_to_check = coldOutfit
+elif second_temp == 'freezing':
+    outfit_to_check = freezingOutfit
+    
+# add missing items from the outfit to the garments dictionary
+for key in outfit_to_check:
+    if key not in garments:
+        garments[key] = outfit_to_check[key]
+        
+# print the final garment items to check the correctness of missing items addition
+print(f"Final garment items: {garments}")
+
+# figure out how to move forward from here after getting a code review from trew tomorrow, 
+# remember this needs to display to the user
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         #if anything else in the set it will be a colder rating
