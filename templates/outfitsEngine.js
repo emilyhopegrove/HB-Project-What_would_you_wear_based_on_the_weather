@@ -2,45 +2,7 @@
 
 // inputs: temperature(farenheit) and precipitation(boolean) pulled from the api
 
-//hot outfit
-const hotOutfit = {
-    top: "T-Shirt",
-    bottom: "Shorts",
-    footwear: "Sandals",
-}
 
-const hotWetOutfit = {
-    top: "T-Shirt",
-    bottom: "Shorts",
-    footwear: "Sandals",
-    Accessories: "Umbrella"
-}
-
-const coldOutfit = {
-    top: "Hoodie",
-    bottom: "Jeans",
-    footwear: "Tennis shoes",
-}
-
-const coldWetOutfit = {
-    top: "Hoodie",
-    bottom: "Jeans",
-    footwear: "Tennis shoes",
-    Accessories: "Umbrella"
-}
-
-const warmOutfit = {
-    top: "T-Shirt",
-    bottom: "Jeans",
-    footwear: "Tennis shoes",
-}
-
-const warmWetOutfit = {
-    top: "T-Shirt",
-    bottom: "Jeans",
-    footwear: "Tennis shoes",
-    Accessories: "Umbrella"
-}
 
 
 
