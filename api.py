@@ -281,69 +281,70 @@ def recommendOutfit(temperature, precip=False):
 # create a set to store the rating of the temperature
     temps_for_day = set()
     # categorize the temperature into hot, warm, cold, or freezing
-if temperature >= 80:
-    temps_for_day.add('hot')
-elif temperature >= 56:
-    temps_for_day.add('warm')
-elif temperature >= 33:
-    temps_for_day.add('cold')
-else:
-    temps_for_day.add('freezing')
+
+    if temperature >= 80:
+        temps_for_day.add('hot')
+    elif temperature >= 56:
+        temps_for_day.add('warm')
+    elif temperature >= 33:
+        temps_for_day.add('cold')
+    else:
+        temps_for_day.add('freezing')
     
 # print the temperature category to check the correctness of temperature categorization
 #print(f"Temperature category: {temps_for_day}")
 
 # create a dictionary to store the outfit for the day
-garments = {}
+    garments = {}
 
 # get the outfit based on the temperature (handle for 1 temp in set)
-if len(temps_for_day) == 1:
-    # if there is only one temperature rating, add the corresponding outfit to the garments dictionary
-    temp_word = list(temps_for_day)[0]
-    if temp_word == 'hot':
-        garments.update(hotOutfit)
-    elif temp_word == 'warm':
-        garments.update(warmOutfit)
-    elif temp_word == 'cold':
-        garments.update(coldOutfit)
-    elif temp_word == 'freezing':
-        garments.update(freezingOutfit)
-else:
-    # if there are two temperature ratings, add the corresponding outfit to the garments dictionary and remove the used rating from the set
-    if 'hot' in temps_for_day:
-        garments.update(hotOutfit)
-        temps_for_day.remove('hot')
-    if 'warm' in temps_for_day:
-        garments.update(warmOutfit)
-        temps_for_day.remove('warm')
-    if 'cold' in temps_for_day:
-        garments.update(coldOutfit)
-        temps_for_day.remove('cold')
-    if 'freezing' in temps_for_day:
-        garments.update(freezingOutfit)
-        temps_for_day.remove('freezing')
-        
+    if len(temps_for_day) == 1:
+        # if there is only one temperature rating, add the corresponding outfit to the garments dictionary
+        temp_word = list(temps_for_day)[0]
+        if temp_word == 'hot':
+            garments.update(hotOutfit)
+        elif temp_word == 'warm':
+            garments.update(warmOutfit)
+        elif temp_word == 'cold':
+            garments.update(coldOutfit)
+        elif temp_word == 'freezing':
+            garments.update(freezingOutfit)
+    else:
+        # if there are two temperature ratings, add the corresponding outfit to the garments dictionary and remove the used rating from the set
+        if 'hot' in temps_for_day:
+            garments.update(hotOutfit)
+            temps_for_day.remove('hot')
+        if 'warm' in temps_for_day:
+            garments.update(warmOutfit)
+            temps_for_day.remove('warm')
+        if 'cold' in temps_for_day:
+            garments.update(coldOutfit)
+            temps_for_day.remove('cold')
+        if 'freezing' in temps_for_day:
+            garments.update(freezingOutfit)
+            temps_for_day.remove('freezing')
+            
 # print the updated garment items to check the correctness of garment items assignment
 #print(f"Garment items: {garments}")
 
 # get the second highest temperature rating
-second_temp = list(temps_for_day)[0]
+    second_temp = list(temps_for_day)[0]
 
 # add missing items to the outfit based on the second highest temperature rating
-if second_temp == 'warm':
-    outfit_to_check = warmOutfit
-elif second_temp == 'cold':
-    outfit_to_check = coldOutfit
-elif second_temp == 'freezing':
-    outfit_to_check = freezingOutfit
+    if second_temp == 'warm':
+        outfit_to_check = warmOutfit
+    elif second_temp == 'cold':
+        outfit_to_check = coldOutfit
+    elif second_temp == 'freezing':
+        outfit_to_check = freezingOutfit
     
 # add missing items from the outfit to the garments dictionary
-for key in outfit_to_check:
-    if key not in garments:
-        garments[key] = outfit_to_check[key]
+    for key in outfit_to_check:
+        if key not in garments:
+            garments[key] = outfit_to_check[key]
         
 # print the final garment items to check the correctness of missing items addition
-print(f"Final garment items: {garments}")
+print(f"Based on your local weather conditions today you should wear: {garments.values()}")
 
 # figure out how to move forward from here after getting a code review from trew tomorrow, 
 # remember this needs to display to the user
