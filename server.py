@@ -57,6 +57,7 @@ freezingOutfit = {
     "footwear": "Boots",
     "Accessories": "Hat, gloves and a scarf!"
 }
+################################################################
 
 @app.route('/homepage')
 def homepage():
@@ -124,13 +125,13 @@ def homepage():
 #     and returns a dictionary which combines the result dictionary with the recommended outfit.
     
 #     result: dict
-#         Dictionary that contains high_temp, low_temp, and precip
+#         Dictionary that contains high_temp, low_temp, and precip conditions pulled from API
         
 #     Returns: dict
-#         A dictionary that contains high_temp, low_temp, precip, and recommended outfit
+#         A dictionary that contains current local weather conditions, 
+#         and recommended outfit to be displayed to the user
 #   
-
-
+#this will eventually get tucked into a function and/or put into crud and called here for tidiness sake
     temps_for_day = set()
     temps = [result["high_temp"], result["low_temp"]]
 
@@ -200,14 +201,14 @@ def homepage():
             garments[key] = outfit_to_check[key]
 
     #combine results with garments 
-    for garment in garments:
-        result[garment] = garments[garment]
+    result['garments'] = garments
 
-    print(result)
+    #print(result)
 
 
     return render_template("homepage.html", result=result)
 
+################################################################
 
 @app.route('/account')
 def account():
