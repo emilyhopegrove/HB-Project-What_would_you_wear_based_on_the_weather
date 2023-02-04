@@ -3,7 +3,7 @@
 {% block title %}Welcome to your homepage!{% endblock %}
 
 {% block content %}
-<p>These are our results: {{result}}</p>
+<!-- <p>These are our results: {{result}}</p> -->
 <h1>Hello!</h1>
 <!-- allow user to navigate to their user account -->
 <!-- <ul>
@@ -17,11 +17,14 @@
 <p>The Temp Is: {{result.temperature}}</p>
 
 
-<h3>Your current outfit suggestion:</h3><br>
-<p>{{result}}</p>
+<h3>Your Outfit Suggestion:</h3><br>
 <!-- make a jinja forloop (look up syntax) loop through result.garments and display -->
-
-
+<ul>
+  <p>You may want to wear:</p>
+  {% for key, value in result.garments.items() %}
+    <li>{{ value }}</li>
+  {% endfor %}
+</ul>
 
   <!-- // make some mock data, like tits above, and that drives conditions
   // the conditions are if/elses that are determine what to wear based on mock data
