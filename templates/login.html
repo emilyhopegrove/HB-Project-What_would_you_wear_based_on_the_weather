@@ -14,40 +14,36 @@ password box
 login button
 validation
 -->
+{% extends 'base.html' %}
+{% block title %}Login To User Account{% endblock %}
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>
-            {% block title %}User Login Page{% endblock %}
-        </title>
-        {% block head %}{% endblock %}
-
-    </head>
-
-    <body>
-        <form>
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required>
-            <br>
-            <br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-            <br>
-            <button onclick="validate()">Login</button>
-        </form>
-        <br>
-        <a href="create-new-account.html">Go here to create an account</a>
-        {%block after_body%}
-
-        <script>
-            function validate(){
-// need help with creating a validation function to check user input against database
-            }
-        </script>
+{% block content %}
+<!-- Start of the login form -->
+<div class="container">
+    <h2 class="text-center">Login</h2>
+    <!-- Form starts -->
+    <form>
+      <!-- Email input -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+      </div>
+       <!-- Password input -->
+      <div class="form-group password">
+        <label for="loginPassword">Password</label>
+        <input type="password" class="form-control" id="Password" name="Password" placeholder="Password" required>
+      </div>
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <!-- End of the form -->
+  </div>
+  <!-- End of the container -->
+  
         {%endblock%}
 
     </body>
 </html>
+
+
+

@@ -24,10 +24,10 @@ class User(db.Model):
     user_name = db.Column(db.String(50), unique = True)
     email = db.Column(db.String(50), unique = True)
     password = db.Column(db.String(100))
-    zip_home = db.Column(db.Integer())
-    #UNCOMMENT OUT BELOW ITEMS AFTER MVP -- will not be required
-    # zip_work = db.Column(db.Integer(5), null=False)
-    # zip_other = db.Column(db.Integer(5) null=False)
+    #home zip required, other 2 optional
+    zip_home = db.Column(db.Integer, nullable=False)
+    zip_work = db.Column(db.Integer)
+    zip_other = db.Column(db.Integer)
     
 
     """show information about the user"""

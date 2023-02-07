@@ -3,13 +3,15 @@
 """Server for wtwbotw app."""
 import os
 from flask import Flask, render_template, request, flash, session, redirect
-from model import connect_to_db
+from model import connect_to_db, db
 import crud
 from jinja2 import StrictUndefined
 import requests
 
-app = Flask(__name__)
 
+app = Flask(__name__)
+#TODO if you deploy hide the secret_key below and keep it secret
+app.secret_key = 'thisisacutestring'
 # outfits dictionary
 #hot outfits
 hotOutfit = {
@@ -221,6 +223,87 @@ def create_new_account():
     "look at the create new account page"
 
     return render_template("create-new-account.html")
+######
+#create a route to register a new user (used ratings-lab solution as a starting poin)
+@app.route("/users", methods=["POST"])
+def register_user():
+    """Create a new user."""
+
+    # Check if the request method is POST
+    try:
+        email = request.form['email']
+        password = request.form['password']
+        zip_home = request.form['homeZip']
+    except KeyError:
+        # Return an error message to the user if they don't provide required information
+        #need to redirect back to form 
+        return "Error: Required information is missing in the form!"
+
+    # Get the other fields, which are not required
+    user_name = request.form.get('username', 'No optional username provided')
+    zip_work = request.form.get('workZip', 'No optional work zip provided')
+    zip_other = request.form.get('otherZips', 'No optional other zips provided')
+    
+
+
+    # Continue with processing the form data
+    #print("******************email****************:", email)
+    #TODO make a crud file for this guy
+    user = crud.get_user_by_email(email)
+    if user:
+        flash("Cannot create an account with that email. Please try again.")
+    else:
+        user = crud.create_user(email, password, user_name, zip_home, zip_work, zip_other)
+        db.session.add(user)
+        db.session.commit()
+        flash("Account created! It's time to log in.")
+
+    return redirect("/homepage")
+
+
+#testing
+    
+    # print("password:", password)
+    # print("home_zip:", home_zip)
+    # print("username:", username)
+    # print("work_zip:", work_zip)
+    # print("other_zips:", other_zips)
+    # print("user:", user)
+
+
+# response = self.app.post('/users', data={'email': 'test@example.com'})
+#     # Assert that the response contains the expected error message
+# self.assertIn("Error: Required information is missing in the form!", response.data)
+
+# def test_form_submission_with_all_fields(self):
+#     # Send a POST request to the "/users" endpoint with all required fields
+#     response = self.app.post('/users', data={
+#         'email': 'test@example.com',
+#         'password': 'password123',
+#         'homeZip': '12345'
+#     })
+    
+#     # Assert that the response contains the success message
+#     self.assertIn("Account created! It's time to log in.", response.data)
+
+
+
+
+
+
+
+
+
+
+######
+@app.route('/login')
+def login():
+    "let the user login to their account"
+
+    return render_template("login.html")
+
+
+
 
 
 # post method zip code form submission, user inputs zip, click submit, hit end point, endpoint grabs zipcode entered
@@ -233,5 +316,6 @@ def create_new_account():
 
 
 if __name__ == "__main__":
-
+    connect_to_db(app)
+    app.app_context().push()
     app.run(host="0.0.0.0", debug=True)

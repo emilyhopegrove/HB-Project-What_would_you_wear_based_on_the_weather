@@ -7,15 +7,61 @@ these things and up to 3 preferred zip/locations to save their home, work and ot
 
 
 <h2>User Account</h2>
-<h3>On this page you'll see the user's profile information, including...</h3>
-
-<ul>
-    <li>email </li>
-    <li>username </li>
-    <li>option to change password </li>
-    <li>home zip </li>
-    <li>work zip </li>
-    <li>other saved zips </li>
-</ul>
-
+<p>You can update your user account here if you want</p>
+<!-- Login form with password update option -->
+<form action="{{ url_for('account') }}" method="post">
+    <!-- Email input -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email">
+    </div>
+    <!-- Username input -->
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" name="username">
+    </div>
+    <!-- Password update checkbox -->
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="updatePassword" name="updatePassword">
+      <label class="form-check-label" for="updatePassword">Update Password</label>
+    </div>
+    <!-- Current password input (only shown if update password is checked) -->
+    <div class="form-group password-update" style="display: none;">
+      <label for="currentPassword">Current Password</label>
+      <input type="password" class="form-control" id="currentPassword" name="currentPassword">
+    </div>
+    <!-- New password input (only shown if update password is checked) -->
+    <div class="form-group password-update" style="display: none;">
+      <label for="newPassword">New Password</label>
+      <input type="password" class="form-control" id="newPassword" name="newPassword">
+    </div>
+    <!-- Home zip input -->
+    <div class="form-group">
+      <label for="homeZip">Home Zip</label>
+      <input type="text" class="form-control" id="homeZip" name="homeZip">
+    </div>
+    <!-- Work zip input -->
+    <div class="form-group">
+      <label for="workZip">Work Zip</label>
+      <input type="text" class="form-control" id="workZip" name="workZip">
+    </div>
+    <!-- Other saved zips input -->
+    <div class="form-group">
+      <label for="otherSavedZips">Other Saved Zip</label>
+      <input type="text" class="form-control" id="otherSavedZips" name="otherSavedZip">
+    </div>
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary">Update Account</button>
+  </form>
+  
+  <!-- JavaScript to toggle password update fields -->
+  <script>
+    document.getElementById('updatePassword').addEventListener('change', function() {
+      let passwordUpdate = document.querySelectorAll('.password-update');
+      for (let i = 0; i < passwordUpdate.length; i++) {
+        passwordUpdate[i].style.display = this.checked ? 'block' : 'none';
+      }
+    });
+  </script>
+  
 {% endblock %}
