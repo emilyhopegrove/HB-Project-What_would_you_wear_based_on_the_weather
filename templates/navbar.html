@@ -15,7 +15,13 @@
           <a class="nav-link" href="{{url_for('account')}}">User Account</a>
         </li>
       </ul>
-      <!-- might uncomment out in future -->
+       <!-- Login button -->
+       <a href="{{url_for('login')}}" class="btn btn-outline-success my-2 my-sm-0">Login</a>
+       
+      <!-- Logout button -->
+      <a href="{{url_for('logout')}}" class="btn btn-outline-danger my-2 my-sm-0">Logout</a>
+
+      <!-- #TODO might uncomment out in future -->
       <!-- <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

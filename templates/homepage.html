@@ -3,18 +3,21 @@
 {% block title %}Welcome to your homepage!{% endblock %}
 
 {% block content %}
+
 <!-- <p>These are our results: {{result}}</p> -->
-<h1>Hello!</h1>
+<h1>Hello, {{user.user_name}}!</h1>
+
 <!-- allow user to navigate to their user account -->
 <!-- <ul>
     <li><a href='/account'> User Account</a></li>
 </ul> -->
 <br>
-<!-- <ul>your home and work location's expected forcast for the day <br>
-    including high and low temps, and precipitation predicions</ul><br> -->
+<!-- <ul>your home and work location's expected forecast for the day <br>
+    including high and low temps, and precipitation predictions</ul><br> -->
 <!-- insert api forcast data here -->
-<h3>Today's forcast for your zip:  </h3>
-<p>The Temp Is: {{result.temperature}}</p>
+<h3>Today's forecast for your zip:  </h3>
+<p>The temp is: {{result.temperature}}</p>
+<!-- TODO I want to add in some logic here where if it is raining or snowing they are informed otherwise it remains blank -->
 
 
 <h3>Your Outfit Suggestion:</h3><br>

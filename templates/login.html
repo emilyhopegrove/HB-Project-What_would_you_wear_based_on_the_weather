@@ -1,37 +1,22 @@
-<!-- This page will ask the user to login with their email and password
-it will offer them an option to create an account if they don't have one
-if the password or email is incorrect they will be prompted to try again
-
-inputs: user's email and password in text fields
-output: if valid, reroute to user's homepage
-if invalid, prompt for login information again
-offer user option to create a new account
-
-nice to have: forgot password feature
-
-email text box
-password box
-login button
-validation
--->
 {% extends 'base.html' %}
 {% block title %}Login To User Account{% endblock %}
 
 {% block content %}
+<!-- This form allows a user to login or get notified that they aren't a user yet, or change a password -->
 <!-- Start of the login form -->
 <div class="container">
     <h2 class="text-center">Login</h2>
-    <!-- Form starts -->
-    <form>
+    <!-- Form starts: upon successfully matching user inputted login credentials, route to homepage -->
+    <form action = '/homepage' method="POST">
       <!-- Email input -->
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+        <input name="email" type="email" class="form-control" id="email" placeholder="Enter email" required>
       </div>
        <!-- Password input -->
-      <div class="form-group password">
+      <div class="form-group">
         <label for="loginPassword">Password</label>
-        <input type="password" class="form-control" id="Password" name="Password" placeholder="Password" required>
+        <input name='password' type="password" class="form-control" id="Password" placeholder="Enter password" required>
       </div>
       <!-- Submit button -->
       <button type="submit" class="btn btn-primary">Login</button>

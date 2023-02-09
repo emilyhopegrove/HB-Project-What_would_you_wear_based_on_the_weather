@@ -44,3 +44,29 @@ note about base.html page:
 TF-8 is a character encoding standard for Unicode 
 and will ensure that any special characters in the HTML file will be interpreted correctly by the browser.
 
+create a user account testing
+
+#testing
+    
+    # print("password:", password)
+    # print("home_zip:", home_zip)
+    # print("username:", username)
+    # print("work_zip:", work_zip)
+    # print("other_zips:", other_zips)
+    # print("user:", user)
+
+
+# response = self.app.post('/users', data={'email': 'test@example.com'})
+#     # Assert that the response contains the expected error message
+# self.assertIn("Error: Required information is missing in the form!", response.data)
+
+# def test_form_submission_with_all_fields(self):
+#     # Send a POST request to the "/users" endpoint with all required fields
+#     response = self.app.post('/users', data={
+#         'email': 'test@example.com',
+#         'password': 'password123',
+#         'homeZip': '12345'
+#     })
+    
+#     # Assert that the response contains the success message
+#     self.assertIn("Account created! It's time to log in.", response.data)
