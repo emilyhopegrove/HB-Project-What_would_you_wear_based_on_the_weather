@@ -2,7 +2,7 @@
 
 """Server for wtwbotw app."""
 import os
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from model import connect_to_db, db
 import crud
 from jinja2 import StrictUndefined
@@ -16,10 +16,10 @@ app.secret_key = 'thisisacutestring'
 
 
 ################################################################
-
+#TODO change the route name and function name to 'homeOutfit' and change throughout the code
 @app.route('/homepage')
 def homepage():
-    "look at the homepage - display the outfit based on weather condition, only visible when user is logged in"
+    "look at the homepage - display the outfit based on weather condition in home location, only visible when user is logged in"
     geocode_url = 'http://api.openweathermap.org/geo/1.0/zip'
     #make the api key super duper safe
     api_key = os.environ['api_key']
@@ -37,23 +37,50 @@ def homepage():
     
     result = crud.choose_outfit_by_weather(geocode_params, api_key, geocode_url)
     return render_template("homepage.html", result=result, user=user)
+
+
+#user's secondary/tertiary zip code and corresponding outfit route
+
+#add a new endpoint that handles the AJAX request 
+# and returns the weather data and corresponding outfit as a JSON object.
+@app.route('/homepage', methods=["get"])
+def workOutfit():
+    "display the outfit based on weather condition in alternate locations, only visible when user is logged in"
+    zipcode = request.args.get("zipcode")
+
+    geocode_url = 'http://api.openweathermap.org/geo/1.0/zip'
+    api_key = os.environ['api_key']
+
+    if 'user_email' not in session:
+        return redirect('/login')
+
+    user = crud.get_user_by_email(session["user_email"])
+
+    geocode_params = {
+        'zip': user.zip_work,
+        'appid': api_key
+    }
+
+    result = crud.choose_outfit_by_weather(geocode_params, api_key, geocode_url)
+
+    return jsonify(result)
 #homepage ^
 ################################################################
 
 @app.route('/account')
 def account():
-    "look at the user's account page - user puts in their information"
+    "Where the user can update account information like password"
 
     return render_template("homepage.html")
 
 @app.route('/create-new-account')
 def create_new_account():
-    "look at the create new account page"
+    "User can input their information to create a new account"
 
     return render_template("create-new-account.html")
 ###################################################################
 
-#create a route to register a new user (used ratings-lab solution as a starting poin)
+#create a route to register a new user 
 @app.route("/users", methods=["POST"])
 def register_user():
     """Create a new user."""
@@ -90,8 +117,6 @@ def register_user():
         flash("Account created! It's time to log in.")
 
     return redirect("/homepage")
-
-
 
 
 ############################################################################
@@ -132,12 +157,7 @@ def logout():
 
 
 ###################################################################################
-#creating a reusable user name variable to pull over to home page to greet the user
 
-# @app.route('/homepage')
-# def index():
-#     user = {'email': 'user@example.com'}
-#     return render_template('homepage.html', user=user)
 
 
 if __name__ == "__main__":

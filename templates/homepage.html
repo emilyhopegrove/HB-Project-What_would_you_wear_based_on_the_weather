@@ -14,14 +14,14 @@
 <br>
 <!-- <ul>your home and work location's expected forecast for the day <br>
     including high and low temps, and precipitation predictions</ul><br> -->
-<!-- insert api forcast data here -->
+<!-- insert api forecast data here -->
 <h3>Today's forecast for your zip:  </h3>
 <p>The temp is: {{result.temperature}}</p>
 <!-- TODO I want to add in some logic here where if it is raining or snowing they are informed otherwise it remains blank -->
 
 
 <h3>Your Outfit Suggestion:</h3><br>
-<!-- make a jinja forloop (look up syntax) loop through result.garments and display -->
+<!-- make a jinja forloop loop through result.garments and display -->
 <ul>
   <p>You may want to wear:</p>
   {% for key, value in result.garments.items() %}
@@ -29,10 +29,8 @@
   {% endfor %}
 </ul>
 
-  <!-- // make some mock data, like tits above, and that drives conditions
-  // the conditions are if/elses that are determine what to wear based on mock data
-  // you need to think about the data structure to use for showing random clothing shit
-  // see white board for some basic shit/ideas -->
+
+
 
 
 <!-- <ul>your favorite outfits</ul><br> -->
