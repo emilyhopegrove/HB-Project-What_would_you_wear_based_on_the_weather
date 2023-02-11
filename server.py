@@ -36,16 +36,16 @@ def homepage():
     }
     
     result = crud.choose_outfit_by_weather(geocode_params, api_key, geocode_url)
-    return render_template("homepage.html", result=result, user=user)
+    return render_template("homepageExperimenter.html", result=result, user=user)
 
 
 #user's secondary/tertiary zip code and corresponding outfit route
 
 #add a new endpoint that handles the AJAX request 
 # and returns the weather data and corresponding outfit as a JSON object.
-@app.route('/homepage', methods=["get"])
-def workOutfit():
-    "display the outfit based on weather condition in alternate locations, only visible when user is logged in"
+@app.route('/outfit/<location>', methods=["get"])
+def workOutfit(location):
+    """display the outfit based on weather condition in alternate locations, only visible when user is logged in"""
     zipcode = request.args.get("zipcode")
 
     geocode_url = 'http://api.openweathermap.org/geo/1.0/zip'
@@ -56,8 +56,15 @@ def workOutfit():
 
     user = crud.get_user_by_email(session["user_email"])
 
+    if location == 'zip_work':
+        zipcode = user.zip_work
+    elif location == 'zip_home':
+        zipcode = user.zip_home
+    elif location == 'zip_other':
+        zipcode = user.zip_other
+
     geocode_params = {
-        'zip': user.zip_work,
+        'zip': zipcode,
         'appid': api_key
     }
 
