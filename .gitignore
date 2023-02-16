@@ -1,2 +1,8 @@
 env
 secrets.sh
+apikey.py
+notes.txt
+data/
+logindemo.py
+static/password_reset_form.html
+templates/pwhashing.py

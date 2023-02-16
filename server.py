@@ -1,7 +1,7 @@
 #pulled from ratings app server.py
 
 """Server for wtwbotw app."""
-import os
+from apikey import api_key
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from model import connect_to_db, db
 import crud
@@ -16,15 +16,11 @@ app.secret_key = 'thisisacutestring'
 
 
 ################################################################
-#TODO change the route name and function name to 'homeOutfit' and change throughout the code
+#AirBnB application v
 @app.route('/homepage')
 def homepage():
     "look at the homepage - display the outfit based on weather condition in home location, only visible when user is logged in"
     geocode_url = 'http://api.openweathermap.org/geo/1.0/zip'
-    #make the api key super duper safe
-    # api_key = os.environ['api_key']
-    # TODO fix this stuff later before going to prod
-    api_key = '437ebc27db78460bc96c720884188dbb'
 
     if 'user_email' not in session:
         return redirect('/login')
@@ -41,8 +37,6 @@ def homepage():
     return render_template("homepage.html", result=result, user=user)
 
 
-#user's secondary/tertiary zip code and corresponding outfit route
-
 #add a new endpoint that handles the AJAX request 
 # and returns the weather data and corresponding outfit as a JSON object.
 @app.route('/outfit/<location>', methods=["get"])
@@ -51,11 +45,6 @@ def workOutfit(location):
     zipcode = request.args.get("zipcode")
 
     geocode_url = 'http://api.openweathermap.org/geo/1.0/zip'
-    # api_key = os.environ['api_key']
-    # TODO fix this later before going to prod
-    api_key = '437ebc27db78460bc96c720884188dbb'
-
-    # print("my api ", api_key)
 
     if 'user_email' not in session:
         return redirect('/login')
@@ -77,7 +66,7 @@ def workOutfit(location):
     result = crud.choose_outfit_by_weather(geocode_params, api_key, geocode_url)
 
     return jsonify(result)
-#homepage ^
+#AirBnB application ^
 ################################################################
 
 @app.route('/account')

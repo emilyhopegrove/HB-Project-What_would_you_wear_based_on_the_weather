@@ -33,7 +33,7 @@
   
   <script>
     function displayWeatherData(zipCode, temperature, garments) {
-      alert('hey!!!!!!!!!!!')
+      //alert('hey!!!!!!!!!!!')
         document.querySelector('#zipCode').innerHTML = `Today's forecast for your ${zipCode}:`;
       document.querySelector('#temperature').innerHTML = `The temp is: ${temperature}`;
       let garmentList = "";
@@ -42,17 +42,14 @@
       }
       document.querySelector('#garments').innerHTML = garmentList;
     }
-//   I think this needs to be adjusted so that the zipcode argument can be tied to both the home and work zips
-    function getWeatherData(zipCode) {
-      // Make an AJAX call to get the weather data for the given zip code
-      // 
-  
-    //   test response data
-    //   const responseData = {
-    //     temperature: 72,
-    //     garments: ['T-shirt', 'Jeans', 'Sneakers']
-    //   };
 
+    //add getweatherdata to airbnb application. put this on to the homepage and make the homepage work
+//   create a function that allows the user to toggle between work and home zip code weather data and corresponding outfits
+    
+    function getWeatherData(zipCode) {
+      /*create a function that allows the user to toggle between work and home zip codes without reloading 
+       by using AJAX to display weather data and corresponding outfits. 
+       Weather data is gathered using an API call.*/
   
       displayWeatherData(zipCode, responseData.temperature, responseData.garments);
     }
@@ -79,12 +76,9 @@
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
             });
-                //TODO do the same above but display if there is rain or snowing conditions
-
     
     });
-    
-    // Add event listeners to the tab buttons to display the weather data for the work zip code
+    // Make an AJAX call to get the weather data for the work zip codes
     document.querySelector('#workTab').addEventListener('click', function() {
         fetch('/outfit/zip_work')
             .then(response => {
@@ -141,7 +135,52 @@
   
     // Display the home tab by default
     // openTab('home');
-  </script>
+  //</script>
+
+
+
+
 
 
   {% endblock %}
+
+<!-- ###########original homepage##### works but doesn't toggle##### -->
+  {% extends 'base.html' %}
+
+{% block title %}Welcome to your homepage!{% endblock %}
+
+{% block content %}
+
+<!-- <p>These are our results: {{result}}</p> -->
+<h1>Hello, {{user.user_name}}!</h1>
+<br>
+
+<!-- Create a container for the tab buttons -->
+<div class="tab">
+  <button class="tablinks" id="homeTab">Home</button>
+  <button class="tablinks" id="workTab">Work</button>
+  <!-- <button class="tablinks" id="otherTab">Other</button> -->
+</div>
+
+<!-- Create a container for the tab content -->
+<div id="tabContent" class="tabcontent">
+  <h3 id="zipCode"></h3>
+  <p id="temperature"></p>
+
+<!-- TODO I want to add in some logic here where if it is raining or snowing they are informed otherwise it remains blank -->
+
+<!-- insert api forecast data here -->
+<h3>Today's forecast for your zip:  </h3>
+<p>The temp is: {{result.temperature}}</p>
+
+
+<h3>Your Outfit Suggestion:</h3><br>
+<!-- make a jinja forloop loop through result.garments and display -->
+<ul>
+  <p>You may want to wear:</p>
+  {% for key, value in result.garments.items() %}
+    <li>{{ value }}</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

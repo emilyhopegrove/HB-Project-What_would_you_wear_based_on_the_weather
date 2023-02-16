@@ -70,3 +70,685 @@ create a user account testing
     
 #     # Assert that the response contains the success message
 #     self.assertIn("Account created! It's time to log in.", response.data)
+
+adding stuff to database use the stuff below to add to the actual database:
+ app.app_context().push()
+g1 = create_garment('tops', 't-shirt', 'cute pink shirt', 'hot', 1)
+db.session.add(g1)
+db.session.commit()
+a=g1.user
+
+g2 = create_garment('tops', 't-shirt', 'cute purple shirt', 'hot', 1)
+db.session.add(g2)
+db.session.commit()
+b=g2.user
+
+g3 = create_garment('bottoms', 'shorts', 'cute pink shorts', 'hot', 1)
+db.session.add(g3)
+db.session.commit()
+c=g3.user
+
+
+g4 = create_garment('bottoms', 'shorts', 'cute purple shorts', 'hot', 1)
+db.session.add(g4)
+db.session.commit()
+d=g4.user
+
+g5 = create_garment('footwear', 'sandals', 'cute pink sandals', 'hot', 1)
+db.session.add(g5)
+db.session.commit()
+e=g5.user
+
+g6 = create_garment('footwear', 'sandals', 'cute purple sandals', 'hot', 1)
+db.session.add(g6)
+db.session.commit()
+f=g6.user
+
+
+=======================================================
+creating a feature for a randomized outfit based on weather
+pseudocoding
+
+1. choose_outfit_by_weather needs to take in user_id so add in a new param for user_id
+     inside function query for the user (user = User.get(user_id)) 
+     multiple queries:
+        inside choose_outfit_by_weather we need to extract what the temperature is and convert to temp_rating
+            for each type of clothing, user.garments.filter(temperature)
+            return list of types of clothing 
+            then use random.choice (of these tops, bottoms, shoes etc what do I pick) to return to user their randomly selected outfit suggestion
+
+
+
+3.0 user can store favorite outfits 
+
+/*
+  make a front end feature where a user can see a grid/ list of outfit options with checkboxes 
+they can click multiple items of, where the grid has columns categorized under 'hot' 'warm' and 'cold', 
+with 'tops' 'bottoms' 'footwear' and 'accessories' categories.
+
+ in the 'hot' + 'tops' area include: T-shirts
+Tank tops
+Henley shirts
+Linen shirts
+Short-sleeve button-ups
+Polo shirts
+Graphic tees
+Sunset shirts
+Breathable mesh shirts
+Sleeveless tops
+
+in the 'hot' + 'bottom' area include:
+Shorts
+Capri pants
+Cropped pants
+Skirts
+Lightweight joggers
+Linen pants
+Bermuda shorts
+Khaki shorts
+Denim cutoffs
+Gaucho pants
+Printed palazzo pants
+Harem pants
+Drawstring shorts
+Maxi skirts
+
+in the 'hot' + 'footwear' area include:
+Sandals
+Flip-flops
+Slides
+Thong sandals
+Espadrilles
+Open-toe heels
+Slingback sandals
+Platform sandals
+
+in the 'warm' + 'tops' area include:
+T-shirts
+Tank tops
+Henley shirts
+Linen shirts
+Short-sleeve button-ups
+Polo shirts
+Graphic tees
+Sunset shirts
+Breathable mesh shirts
+Sleeveless tops
+Cotton blend short-sleeve shirts
+Crochet tops
+Tropical print shirts
+Lightweight knit tops
+
+in the 'warm' + 'bottom' area include:
+Shorts
+Capri pants
+Cropped pants
+Skirts
+Lightweight joggers
+Linen pants
+Bermuda shorts
+Khaki shorts
+Denim cutoffs
+Gaucho pants
+Printed palazzo pants
+Harem pants
+Drawstring shorts
+Maxi skirts
+
+in the 'warm' + "footwear" area include:
+Sneakers
+Loafers
+Boat shoes
+Canvas sneakers
+Mules
+
+
+in the 'cold' + "top" area include:
+Flannel shirts
+Thermal shirts
+Turtlenecks
+Heavyweight cotton shirts
+Hoodie
+Sweater shirts
+Fleece shirts
+Long-sleeve Henley shirts
+Quilted shirts
+Cashmere blend shirts
+
+in the 'cold' + 'bottom' area include:
+Jeans
+Leggings
+Thermal pants
+Sweatpants
+Corduroy pants
+Fleece-lined tights
+Wool trousers
+Heavyweight cargo pants
+Quilted pants
+Snow pants
+Insulated shorts
+Sweater leggings
+Knit tights
+Fleece joggers
+Thick knit leg warmers
+
+and finally in the 'cold' + "footwear" area include:
+Winter sneakers
+Ankle boots
+Suede boots
+Warm-lined boots
+
+Please make it so if there are any overlapping items in the different columns the user can only check it once, 
+and cross out the duplicates if the item has already been checked off.*/
+
+
+form for user to select clothing items
+
+Create a form for the user to select their clothing items
+  <form>
+    <!-- Create a form group for the tops category -->
+    <div class="form-group">
+      <!-- Add a subheading for the tops category -->
+      <h3>Tops</h3>
+      <!-- Iterate through the tops list in the database and create a checkbox for each item -->
+      {% for top in whatToWear.tops %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the top -->
+          <input type="checkbox" class="form-check-input" name="top" value="{{ top }}" id="top{{ loop.index }}" {% if top in selected_tops %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the top -->
+          <label class="form-check-label" for="top{{ loop.index }}">{{ top }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected tops -->
+      {% if selected_tops %}
+        <p>You have selected the following tops:</p>
+        <ul>
+          {% for top in selected_tops %}
+            <li>{{ top }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <!-- Create a form group for the bottoms category -->
+    <div class="form-group">
+      <!-- Add a subheading for the bottoms category -->
+      <h3>Bottoms</h3>
+      <!-- Iterate through the bottoms list in the database and create a checkbox for each item -->
+      {% for bottom in whatToWear.bottoms %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the bottom -->
+          <input type="checkbox" class="form-check-input" name="bottom" value="{{ bottom }}" id="bottom{{ loop.index }}"
+            {% if bottom in selected_bottoms %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the bottom -->
+          <label class="form-check-label" for="bottom{{ loop.index }}">{{ bottom }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected bottoms -->
+      {% if selected_bottoms %}
+        <p>You have selected the following bottoms:</p>
+        <ul>
+          {% for bottom in selected_bottoms %}
+            <li>{{ bottom }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <!-- Create a form group for the footwear category -->
+    <div class="form-group">
+      <!-- Add a subheading for the footwear category -->
+      <h3>Footwear</h3>
+      <!-- Iterate through the footwear list in the database and create a checkbox for each item -->
+      {% for shoe in whatToWear.footwear %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the shoe -->
+          <input type="checkbox" class="form-check-input" name="footwear" value="{{ shoe }}" id="footwear{{ loop.index }}" {% if shoe in selected_footwear %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the shoe -->
+          <label class="form-check-label" for="footwear{{ loop.index }}">{{ shoe }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected footwear -->
+      {% if selected_footwear %}
+        <p>You have selected the following footwear:</p>
+        <ul>
+          {% for shoe in selected_footwear %}
+            <li>{{ shoe }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <!-- Create a form group for the accessories category -->
+    <div class="form-group">
+      <!-- Add a subheading for the accessories category -->
+      <h3>Accessories</h3>
+      <!-- Iterate through the accessories list in the database and create a checkbox for each item -->
+      {% for accessory in whatToWear.accessories %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the accessory -->
+          <input type="checkbox" class="form-check-input" name="accessories" value="{{ accessory }}" id="accessory{{ loop.index }}" {% if accessory in selected_accessories %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the accessory -->
+          <label class="form-check-label" for="accessory{{ loop.index }}">{{ accessory }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected accessories -->
+      {% if selected_accessories %}
+        <p>You have selected the following accessories:</p>
+        <ul>
+          {% for accessory in selected_accessories %}
+            <li>{{ accessory }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+Create a form for the user to select their clothing items
+  <form>
+    <!-- Create a form group for the tops category -->
+    <div class="form-group">
+      <!-- Add a subheading for the tops category -->
+      <h3>Tops</h3>
+      <!-- Iterate through the tops list in the database and create a checkbox for each item -->
+      {% for top in whatToWear.tops %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the top -->
+          <input type="checkbox" class="form-check-input" name="top" value="{{ top }}" id="top{{ loop.index }}" {% if top in selected_tops %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the top -->
+          <label class="form-check-label" for="top{{ loop.index }}">{{ top }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected tops -->
+      {% if selected_tops %}
+        <p>You have selected the following tops:</p>
+        <ul>
+          {% for top in selected_tops %}
+            <li>{{ top }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <!-- Create a form group for the bottoms category -->
+    <div class="form-group">
+      <!-- Add a subheading for the bottoms category -->
+      <h3>Bottoms</h3>
+      <!-- Iterate through the bottoms list in the database and create a checkbox for each item -->
+      {% for bottom in whatToWear.bottoms %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the bottom -->
+          <input type="checkbox" class="form-check-input" name="bottom" value="{{ bottom }}" id="bottom{{ loop.index }}"
+            {% if bottom in selected_bottoms %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the bottom -->
+          <label class="form-check-label" for="bottom{{ loop.index }}">{{ bottom }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected bottoms -->
+      {% if selected_bottoms %}
+        <p>You have selected the following bottoms:</p>
+        <ul>
+          {% for bottom in selected_bottoms %}
+            <li>{{ bottom }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <!-- Create a form group for the footwear category -->
+    <div class="form-group">
+      <!-- Add a subheading for the footwear category -->
+      <h3>Footwear</h3>
+      <!-- Iterate through the footwear list in the database and create a checkbox for each item -->
+      {% for shoe in whatToWear.footwear %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the shoe -->
+          <input type="checkbox" class="form-check-input" name="footwear" value="{{ shoe }}" id="footwear{{ loop.index }}" {% if shoe in selected_footwear %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the shoe -->
+          <label class="form-check-label" for="footwear{{ loop.index }}">{{ shoe }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected footwear -->
+      {% if selected_footwear %}
+        <p>You have selected the following footwear:</p>
+        <ul>
+          {% for shoe in selected_footwear %}
+            <li>{{ shoe }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <!-- Create a form group for the accessories category -->
+    <div class="form-group">
+      <!-- Add a subheading for the accessories category -->
+      <h3>Accessories</h3>
+      <!-- Iterate through the accessories list in the database and create a checkbox for each item -->
+      {% for accessory in whatToWear.accessories %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the accessory -->
+          <input type="checkbox" class="form-check-input" name="accessories" value="{{ accessory }}" id="accessory{{ loop.index }}" {% if accessory in selected_accessories %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the accessory -->
+          <label class="form-check-label" for="accessory{{ loop.index }}">{{ accessory }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected accessories -->
+      {% if selected_accessories %}
+        <p>You have selected the following accessories:</p>
+        <ul>
+          {% for accessory in selected_accessories %}
+            <li>{{ accessory }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+Create a form for the user to select their clothing items
+  <form>
+    <!-- Create a form group for the tops category -->
+    <div class="form-group">
+      <!-- Add a subheading for the tops category -->
+      <h3>Tops</h3>
+      <!-- Iterate through the tops list in the database and create a checkbox for each item -->
+      {% for top in whatToWear.tops %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the top -->
+          <input type="checkbox" class="form-check-input" name="top" value="{{ top }}" id="top{{ loop.index }}" {% if top in selected_tops %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the top -->
+          <label class="form-check-label" for="top{{ loop.index }}">{{ top }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected tops -->
+      {% if selected_tops %}
+        <p>You have selected the following tops:</p>
+        <ul>
+          {% for top in selected_tops %}
+            <li>{{ top }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <!-- Create a form group for the bottoms category -->
+    <div class="form-group">
+      <!-- Add a subheading for the bottoms category -->
+      <h3>Bottoms</h3>
+      <!-- Iterate through the bottoms list in the database and create a checkbox for each item -->
+      {% for bottom in whatToWear.bottoms %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the bottom -->
+          <input type="checkbox" class="form-check-input" name="bottom" value="{{ bottom }}" id="bottom{{ loop.index }}"
+            {% if bottom in selected_bottoms %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the bottom -->
+          <label class="form-check-label" for="bottom{{ loop.index }}">{{ bottom }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected bottoms -->
+      {% if selected_bottoms %}
+        <p>You have selected the following bottoms:</p>
+        <ul>
+          {% for bottom in selected_bottoms %}
+            <li>{{ bottom }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <!-- Create a form group for the footwear category -->
+    <div class="form-group">
+      <!-- Add a subheading for the footwear category -->
+      <h3>Footwear</h3>
+      <!-- Iterate through the footwear list in the database and create a checkbox for each item -->
+      {% for shoe in whatToWear.footwear %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the shoe -->
+          <input type="checkbox" class="form-check-input" name="footwear" value="{{ shoe }}" id="footwear{{ loop.index }}" {% if shoe in selected_footwear %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the shoe -->
+          <label class="form-check-label" for="footwear{{ loop.index }}">{{ shoe }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected footwear -->
+      {% if selected_footwear %}
+        <p>You have selected the following footwear:</p>
+        <ul>
+          {% for shoe in selected_footwear %}
+            <li>{{ shoe }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <!-- Create a form group for the accessories category -->
+    <div class="form-group">
+      <!-- Add a subheading for the accessories category -->
+      <h3>Accessories</h3>
+      <!-- Iterate through the accessories list in the database and create a checkbox for each item -->
+      {% for accessory in whatToWear.accessories %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the accessory -->
+          <input type="checkbox" class="form-check-input" name="accessories" value="{{ accessory }}" id="accessory{{ loop.index }}" {% if accessory in selected_accessories %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the accessory -->
+          <label class="form-check-label" for="accessory{{ loop.index }}">{{ accessory }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected accessories -->
+      {% if selected_accessories %}
+        <p>You have selected the following accessories:</p>
+        <ul>
+          {% for accessory in selected_accessories %}
+            <li>{{ accessory }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+Create a form for the user to select their clothing items
+  <form>
+    <!-- Create a form group for the tops category -->
+    <div class="form-group">
+      <!-- Add a subheading for the tops category -->
+      <h3>Tops</h3>
+      <!-- Iterate through the tops list in the database and create a checkbox for each item -->
+      {% for top in whatToWear.tops %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the top -->
+          <input type="checkbox" class="form-check-input" name="top" value="{{ top }}" id="top{{ loop.index }}" {% if top in selected_tops %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the top -->
+          <label class="form-check-label" for="top{{ loop.index }}">{{ top }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected tops -->
+      {% if selected_tops %}
+        <p>You have selected the following tops:</p>
+        <ul>
+          {% for top in selected_tops %}
+            <li>{{ top }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <!-- Create a form group for the bottoms category -->
+    <div class="form-group">
+      <!-- Add a subheading for the bottoms category -->
+      <h3>Bottoms</h3>
+      <!-- Iterate through the bottoms list in the database and create a checkbox for each item -->
+      {% for bottom in whatToWear.bottoms %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the bottom -->
+          <input type="checkbox" class="form-check-input" name="bottom" value="{{ bottom }}" id="bottom{{ loop.index }}"
+            {% if bottom in selected_bottoms %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the bottom -->
+          <label class="form-check-label" for="bottom{{ loop.index }}">{{ bottom }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected bottoms -->
+      {% if selected_bottoms %}
+        <p>You have selected the following bottoms:</p>
+        <ul>
+          {% for bottom in selected_bottoms %}
+            <li>{{ bottom }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <!-- Create a form group for the footwear category -->
+    <div class="form-group">
+      <!-- Add a subheading for the footwear category -->
+      <h3>Footwear</h3>
+      <!-- Iterate through the footwear list in the database and create a checkbox for each item -->
+      {% for shoe in whatToWear.footwear %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the shoe -->
+          <input type="checkbox" class="form-check-input" name="footwear" value="{{ shoe }}" id="footwear{{ loop.index }}" {% if shoe in selected_footwear %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the shoe -->
+          <label class="form-check-label" for="footwear{{ loop.index }}">{{ shoe }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected footwear -->
+      {% if selected_footwear %}
+        <p>You have selected the following footwear:</p>
+        <ul>
+          {% for shoe in selected_footwear %}
+            <li>{{ shoe }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <!-- Create a form group for the accessories category -->
+    <div class="form-group">
+      <!-- Add a subheading for the accessories category -->
+      <h3>Accessories</h3>
+      <!-- Iterate through the accessories list in the database and create a checkbox for each item -->
+      {% for accessory in whatToWear.accessories %}
+        <div class="form-check">
+          <!-- Create a checkbox with a unique ID based on the iteration index and a value equal to the name of the accessory -->
+          <input type="checkbox" class="form-check-input" name="accessories" value="{{ accessory }}" id="accessory{{ loop.index }}" {% if accessory in selected_accessories %}disabled{% endif %}>
+          <!-- Add a label for the checkbox with the name of the accessory -->
+          <label class="form-check-label" for="accessory{{ loop.index }}">{{ accessory }}</label>
+        </div>
+      {% endfor %}
+      <!-- Add a bullet point list of selected accessories -->
+      {% if selected_accessories %}
+        <p>You have selected the following accessories:</p>
+        <ul>
+          {% for accessory in selected_accessories %}
+            <li>{{ accessory }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+
+
+/*
+  make a front end feature where a user can see a grid/ list of outfit options with checkboxes 
+they can click multiple items of, where the grid has columns categorized under 'hot' 'warm' and 'cold', 
+with 'tops' 'bottoms' 'footwear' and 'accessories' categories.
+
+ in the 'hot' + 'tops' area include: T-shirts
+Tank tops
+Henley shirts
+Linen shirts
+Short-sleeve button-ups
+Polo shirts
+Graphic tees
+Sunset shirts
+Breathable mesh shirts
+Sleeveless tops
+
+in the 'hot' + 'bottom' area include:
+Shorts
+Capri pants
+Cropped pants
+Skirts
+Lightweight joggers
+Linen pants
+Bermuda shorts
+Khaki shorts
+Denim cutoffs
+Gaucho pants
+Printed palazzo pants
+Harem pants
+Drawstring shorts
+Maxi skirts
+
+in the 'hot' + 'footwear' area include:
+Sandals
+Flip-flops
+Slides
+Thong sandals
+Espadrilles
+Open-toe heels
+Slingback sandals
+Platform sandals
+
+in the 'warm' + 'tops' area include:
+T-shirts
+Tank tops
+Henley shirts
+Linen shirts
+Short-sleeve button-ups
+Polo shirts
+Graphic tees
+Sunset shirts
+Breathable mesh shirts
+Sleeveless tops
+Cotton blend short-sleeve shirts
+Crochet tops
+Tropical print shirts
+Lightweight knit tops
+
+in the 'warm' + 'bottom' area include:
+Shorts
+Capri pants
+Cropped pants
+Skirts
+Lightweight joggers
+Linen pants
+Bermuda shorts
+Khaki shorts
+Denim cutoffs
+Gaucho pants
+Printed palazzo pants
+Harem pants
+Drawstring shorts
+Maxi skirts
+
+in the 'warm' + "footwear" area include:
+Sneakers
+Loafers
+Boat shoes
+Canvas sneakers
+Mules
+Slip-on sneakers
+
+in the 'cold' + "top" area include:
+Flannel shirts
+Thermal shirts
+Turtlenecks
+Heavyweight cotton shirts
+Hoodie
+Sweater shirts
+Fleece shirts
+Long-sleeve Henley shirts
+Quilted shirts
+Cashmere blend shirts
+
+in the 'cold' + 'bottom' area include:
+Jeans
+Leggings
+Thermal pants
+Sweatpants
+Corduroy pants
+Fleece-lined tights
+Wool trousers
+Heavyweight cargo pants
+Quilted pants
+Snow pants
+Insulated shorts
+Sweater leggings
+Knit tights
+Fleece joggers
+Thick knit leg warmers
+
+and finally in the 'cold' + "footwear" area include:
+Winter sneakers
+Ankle boots
+Suede boots
+Warm-lined boots
+
+Please make it so if there are any overlapping items in the different columns the user can only check it once, 
+and cross out the duplicates if the item has already been checked off.*/
+
+randomizer https://www.w3schools.com/python/module_random.asp

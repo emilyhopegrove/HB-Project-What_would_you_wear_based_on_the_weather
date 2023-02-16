@@ -1,39 +1,136 @@
+
 {% extends 'base.html' %}
 
 {% block title %}Welcome to your homepage!{% endblock %}
 
 {% block content %}
 
-<!-- <p>These are our results: {{result}}</p> -->
+<!-- added a container for the tab buttons and a container for the tab content. 
+    The tab buttons each have an event listener that calls the getWeatherData function 
+    for the corresponding zip code, and then calls the openTab function to display the content
+    for that zip code. The openTab function hides all elements with the class-->
+
+<!-- greet the user -->
 <h1>Hello, {{user.user_name}}!</h1>
-<br>
 
 <!-- Create a container for the tab buttons -->
 <div class="tab">
-  <button class="tablinks" id="homeTab">Home</button>
-  <button class="tablinks" id="workTab">Work</button>
-  <!-- <button class="tablinks" id="otherTab">Other</button> -->
-</div>
+    <button class="tablinks" id="homeTab">Home</button>
+    <button class="tablinks" id="workTab">Work</button>
+    <!-- <button class="tablinks" id="otherTab">Other</button> -->
+  </div>
+  
+  <!-- Create a container for the tab content -->
+  <div id="tabContent" class="tabcontent">
+    <h3 id="zipCode"></h3>
+    <p id="temperature"></p>
+  
+    <h3>Your Outfit Suggestion:</h3><br>
+    <ul id="garments">
+    </ul>
+  </div>
+  
+  <script>
+    function displayWeatherData(zipCode, temperature, garments) {
+      //alert('hey!!!!!!!!!!!')
+        document.querySelector('#zipCode').innerHTML = `Today's forecast for your ${zipCode}:`;
+      document.querySelector('#temperature').innerHTML = `The temp is: ${temperature}`;
+      let garmentList = "";
+      for (const garment of garments) {
+        garmentList += `<li>${garment}</li>`;
+      }
+      document.querySelector('#garments').innerHTML = garmentList;
+    }
 
-<!-- Create a container for the tab content -->
-<div id="tabContent" class="tabcontent">
-  <h3 id="zipCode"></h3>
-  <p id="temperature"></p>
+    //add getweatherdata to airbnb application. put this on to the homepage and make the homepage work
+//   create a function that allows the user to toggle between work and home zip code weather data and corresponding outfits
+    
+    function getWeatherData(zipCode) {
+      /*create a function that allows the user to toggle between work and home zip codes without reloading 
+       by using AJAX to display weather data and corresponding outfits. 
+       Weather data is gathered using an API call.*/
+  
+      displayWeatherData(zipCode, responseData.temperature, responseData.garments);
+    }
+  
+    // Add event listeners to the tab buttons to display the weather data for the home zip code
+    document.querySelector('#homeTab').addEventListener('click', function() { 
+        fetch('/outfit/zip_home')
+            .then(response => {
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.querySelector('#temperature').innerHTML=`this is your temperature for today: ${data.temperature}`
+                const outfitDisplay = document.querySelector('#garments')
+                //disallowing children from multiplying with multiple button presses
+                outfitDisplay.innerHTML = ''
 
-<!-- TODO I want to add in some logic here where if it is raining or snowing they are informed otherwise it remains blank -->
+                for (const garment in data.garments) {
+                    outfitDisplay.insertAdjacentHTML("beforeend",`<li>${data.garments[garment]}</li>`);
+                }          
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    
+    });
+    // Make an AJAX call to get the weather data for the work zip codes
+    document.querySelector('#workTab').addEventListener('click', function() {
+        fetch('/outfit/zip_work')
+            .then(response => {
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.querySelector('#temperature').innerHTML=`this is your temperature for today: ${data.temperature}`
+                const outfitDisplay = document.querySelector('#garments')
+                //disallowing children from multiplying with multiple button presses
+                outfitDisplay.innerHTML = ''
 
-<!-- insert api forecast data here -->
-<h3>Today's forecast for your zip:  </h3>
-<p>The temp is: {{result.temperature}}</p>
+                for (const garment in data.garments) {
+                    outfitDisplay.insertAdjacentHTML("beforeend",`<li>${data.garments[garment]}</li>`);
+                }          
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+                //TODO do the same above but display if there is rain or snowing conditions
+
+    
+    });
+    
+  
+
+    // document.querySelector('#otherTab').addEventListener('click', function() {
+    //   getWeatherData('other');
+    //   openTab('other');
+    // });
+  
+    // Function to open the selected tab
+    // function openTab(zipCode) {
+    //   // Get all elements with class="tabcontent" and hide them
+    //   let tabContent = document.getElementsByClassName("tabcontent");
+    //   for (let i = 0; i < tabContent.length; i++) {
+    //     // tabContent[i].style.display = "none";
+    //   }
+  
+    //   // Show the current tab
+    //   console.log("zipcode", zipCode)
+    //   document.getElementById(zipCode).style.display = "block";
+    // }
+  
+    // Display the home tab by default
+    // openTab('home');
+  //</script>
 
 
-<h3>Your Outfit Suggestion:</h3><br>
-<!-- make a jinja forloop loop through result.garments and display -->
-<ul>
-  <p>You may want to wear:</p>
-  {% for key, value in result.garments.items() %}
-    <li>{{ value }}</li>
-  {% endfor %}
-</ul>
 
-{% endblock %}
+
+
+
+  {% endblock %}
