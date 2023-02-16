@@ -7,7 +7,9 @@ import os
 
 geocode_url = 'http://api.openweathermap.org/geo/1.0/zip'
 
-api_key = os.environ['api_key']
+# TODO fix this shit later before going to prod
+# api_key = os.environ['api_key']
+api_key = '437ebc27db78460bc96c720884188dbb'
 
 geocode_params = {
     'zip': 78703,
@@ -346,8 +348,7 @@ def recommendOutfit(temperature, precip=False):
 # print the final garment items to check the correctness of missing items addition
 print(f"Based on your local weather conditions today you should wear: {garments.values()}")
 
-# figure out how to move forward from here after getting a code review from trew tomorrow, 
-# remember this needs to display to the user
+
 
 
 

@@ -7,7 +7,7 @@ these things and up to 3 preferred zip/locations to save their home, work and ot
 
 
 <h2>User Account</h2>
-<p>You can update your user account here if you want</p>
+<p>Make updates to your user account here.</p>
 <!-- Login form with password update option -->
 <form action="{{ url_for('account') }}" method="post">
     <!-- Email input -->
@@ -50,6 +50,299 @@ these things and up to 3 preferred zip/locations to save their home, work and ot
       <label for="otherSavedZips">Other Saved Zip</label>
       <input type="text" class="form-control" id="otherSavedZips" name="otherSavedZip">
     </div>
+
+<!-- TODO add in the garment selector form -->
+
+<h2>What's In Your Wardrobe?</h2>
+<p>Please check off what you have in your wardrobe 
+so we can make a customized outfit for you!</p>
+
+
+<div class="accordion" id="accordionCategories">
+  <div class="card">
+    <div class="card-header" id="headingTops">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTops" aria-expanded="true" aria-controls="collapseTops">
+          Tops
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTops" class="collapse show" aria-labelledby="headingTops" data-parent="#accordionCategories">
+      <div class="card-body">
+    
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Tops</th>
+            <th scope="col">Garment</th>
+            <th scope="col">Weather Condition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                  <label class="custom-control-label" for="customCheck1">1</label>
+              </div>
+            </td>
+            <td>Tank top</td>
+            <td>Hot(80+)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck2">
+                  <label class="custom-control-label" for="customCheck2">2</label>
+              </div>
+            </td>
+            <td>Sleevless top</td>
+            <td>Hot(80+)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck3">
+                  <label class="custom-control-label" for="customCheck3">3</label>
+              </div>
+            </td>
+            <td>Polo shirt</td>
+            <td>Warm(56-79)</td>
+          </tr>
+          
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck4">
+                  <label class="custom-control-label" for="customCheck4">4</label>
+              </div>
+            </td>
+            <td>Graphic Tee</td>
+            <td>Warm(56-79)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck5">
+                  <label class="custom-control-label" for="customCheck5">5</label>
+              </div>
+            </td>
+            <td>Turtleneck</td>
+            <td>Cold(55-)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck6">
+                  <label class="custom-control-label" for="customCheck6">6</label>
+              </div>
+            </td>
+            <td>Hoodie</td>
+            <td>Cold(55-)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+        </div>
+    </div>
+  </div>
+
+   <div class="card">
+    <div class="card-header" id="headingBottoms">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseBottoms" aria-expanded="false" aria-controls="collapseBottoms">
+          Bottoms
+        </button>
+      </h2>
+    </div>
+    <div id="collapseBottoms" class="collapse" aria-labelledby="headingBottoms" data-parent="#accordionCategories">
+      <div class="card-body">
+        <div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Bottoms</th>
+            <th scope="col">Garment</th>
+            <th scope="col">Weather Condition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck7" checked>
+                  <label class="custom-control-label" for="customCheck7">7</label>
+              </div>
+            </td>
+            <td>Shorts</td>
+            <td>Hot(80+)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck8">
+                  <label class="custom-control-label" for="customCheck8">8</label>
+              </div>
+            </td>
+            <td>Denim cutoffs</td>
+            <td>Hot(80+)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck9">
+                  <label class="custom-control-label" for="customCheck9">9</label>
+              </div>
+            </td>
+            <td>Capri pants</td>
+            <td>Warm(56-79)</td>
+          </tr>
+          
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck10">
+                  <label class="custom-control-label" for="customCheck10">10</label>
+              </div>
+            </td>
+            <td>Goucho pants</td>
+            <td>Warm(56-79)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck11">
+                  <label class="custom-control-label" for="customCheck11">11</label>
+              </div>
+            </td>
+            <td>Jeans</td>
+            <td>Cold(55-)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck12">
+                  <label class="custom-control-label" for="customCheck12">12</label>
+              </div>
+            </td>
+            <td>Leggings</td>
+            <td>Cold(55-)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+    
+
+
+       <div class="card">
+    <div class="card-header" id="headingFootwear">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFootwear" aria-expanded="false" aria-controls="collapseFootwear">
+          Footwear
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFootwear" class="collapse" aria-labelledby="headingFootwear" data-parent="#accordionCategories">
+      <div class="card-body">
+        <div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Footwear</th>
+            <th scope="col">Garment</th>
+            <th scope="col">Weather Condition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck13" checked>
+                  <label class="custom-control-label" for="customCheck13">13</label>
+              </div>
+            </td>
+            <td>Sandals</td>
+            <td>Hot(80+)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck14">
+                  <label class="custom-control-label" for="customCheck14">14</label>
+              </div>
+            </td>
+            <td>Flip-flops</td>
+            <td>Hot(80+)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck15">
+                  <label class="custom-control-label" for="customCheck15">15</label>
+              </div>
+            </td>
+            <td>Sneakers</td>
+            <td>Warm(56-79)</td>
+          </tr>
+          
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck16">
+                  <label class="custom-control-label" for="customCheck16">16</label>
+              </div>
+            </td>
+            <td>Loafers</td>
+            <td>Warm(56-79)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck17">
+                  <label class="custom-control-label" for="customCheck17">17</label>
+              </div>
+            </td>
+            <td>Warm-lined boots</td>
+            <td>Cold(55-)</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck18">
+                  <label class="custom-control-label" for="customCheck18">18</label>
+              </div>
+            </td>
+            <td>Winter sneakers</td>
+            <td>Cold(55-)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+    
+
+<br>
+<br>
+
     <!-- Submit button -->
     <button type="submit" class="btn btn-primary">Update Account</button>
   </form>
@@ -63,5 +356,7 @@ these things and up to 3 preferred zip/locations to save their home, work and ot
       }
     });
   </script>
+
+
   
 {% endblock %}

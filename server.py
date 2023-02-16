@@ -22,7 +22,9 @@ def homepage():
     "look at the homepage - display the outfit based on weather condition in home location, only visible when user is logged in"
     geocode_url = 'http://api.openweathermap.org/geo/1.0/zip'
     #make the api key super duper safe
-    api_key = os.environ['api_key']
+    # api_key = os.environ['api_key']
+    # TODO fix this stuff later before going to prod
+    api_key = '437ebc27db78460bc96c720884188dbb'
 
     if 'user_email' not in session:
         return redirect('/login')
@@ -36,7 +38,7 @@ def homepage():
     }
     
     result = crud.choose_outfit_by_weather(geocode_params, api_key, geocode_url)
-    return render_template("homepageExperimenter.html", result=result, user=user)
+    return render_template("homepage.html", result=result, user=user)
 
 
 #user's secondary/tertiary zip code and corresponding outfit route
@@ -49,7 +51,11 @@ def workOutfit(location):
     zipcode = request.args.get("zipcode")
 
     geocode_url = 'http://api.openweathermap.org/geo/1.0/zip'
-    api_key = os.environ['api_key']
+    # api_key = os.environ['api_key']
+    # TODO fix this later before going to prod
+    api_key = '437ebc27db78460bc96c720884188dbb'
+
+    # print("my api ", api_key)
 
     if 'user_email' not in session:
         return redirect('/login')
@@ -78,7 +84,7 @@ def workOutfit(location):
 def account():
     "Where the user can update account information like password"
 
-    return render_template("homepage.html")
+    return render_template("account.html")
 
 @app.route('/create-new-account')
 def create_new_account():
@@ -150,6 +156,7 @@ def handle_login():
     else:
         # Log in user by storing the user's email in session, redirect to homepage
         session["user_email"] = user.email
+        session["user_id"] = user.user_id
         flash(f"Welcome back, {user.user_name}!")
 
     return redirect('/homepage')

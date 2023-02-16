@@ -29,13 +29,16 @@ class User(db.Model):
     zip_work = db.Column(db.Integer)
     zip_other = db.Column(db.Integer)
     
+    #1 user has many garments
+    garments = db.relationship("Garment", back_populates="user")
+
 
     """show information about the user"""
     def __repr__(self):
         return f"<User user_id = {self.user_id} email = {self.email}>"
 
 ################################################################
-#GARMENTS
+#GARMENT
 #create a garments class and give a __repr__ method
 #include the following data:
 """
@@ -72,8 +75,11 @@ class Garment(db.Model):
 
     style_description = db.Column(db.Text,
                               nullable = False)
-
+    #'hot' 'warm' or 'cold' are temp ratings 
     temp_rating = db.Column(db.String(50))
+
+    #1 user has many garments
+    user = db.relationship("User", back_populates="garments")
 
 """show information about the garments including its id number, type and style"""
 def __repr__(self):
@@ -96,8 +102,7 @@ Precipitation | Boolean, not null
 """
 
 class Outfit(db.Model):
-    '''Outfit pieces
-    '''
+    '''Outfit pieces'''
     __tablename__ = 'outfits'
 
 #make the columns, save to useful names
