@@ -2,6 +2,7 @@
 
 from model import db, User, Garment, Outfit, connect_to_db 
 import requests
+import random
 
 # Default outfits dictionary
 #hot outfits
@@ -113,11 +114,18 @@ def get_user_by_username(username):
     getting user from database using their username
     """
 
-    user = User.query.filter(username == User.username).first()
+    user = User.query.filter(username == User.user_name).first()
     return user
 
 
+
+
 def choose_outfit_by_weather(geocode_params, api_key, geocode_url):
+#make a randomizer
+# make into sql alchemy syntax query the database based on the weather SELECT * FROM garments WHERE user_id=3, and style = top and temperature = hot
+    #return a list tops[] bottoms[] footwear[]
+    #then use the python random.choice 
+
 
     response = requests.get(geocode_url, params=geocode_params)
 
@@ -169,18 +177,6 @@ def choose_outfit_by_weather(geocode_params, api_key, geocode_url):
             "low_temp": low_temp
         }
     
-#Recommended Outfit
-#     This function takes a dictionary as input, which contains high_temp, low_temp, and precip,
-#     and returns a dictionary which combines the result dictionary with the recommended outfit.
-    
-#     result: dict
-#         Dictionary that contains high_temp, low_temp, and precip conditions pulled from API
-        
-#     Returns: dict
-#         A dictionary that contains current local weather conditions, 
-#         and recommended outfit to be displayed to the user
-#   
-#this will eventually get tucked into a function and/or put into crud and called here for tidiness sake
     temps_for_day = set()
     temps = [result["high_temp"], result["low_temp"]]
 

@@ -3,10 +3,12 @@
 """Server for wtwbotw app."""
 from apikey import api_key
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
-from model import connect_to_db, db
+from model import connect_to_db, db, User
 import crud
 from jinja2 import StrictUndefined
 import requests
+from werkzeug.security import generate_password_hash, check_password_hash
+import random
 
 
 
@@ -124,7 +126,8 @@ def register_user():
     if user:
         flash("Cannot create an account with that email. Please try again.")
     else:
-        user = crud.create_user(email, password, user_name, zip_home, zip_work, zip_other)
+        hash_password = generate_password_hash(password, method='pbkdf2:sha256', salt_length=8)
+        user = crud.create_user(email, hash_password, user_name, zip_home, zip_work, zip_other)
         db.session.add(user)
         db.session.commit()
         flash("Account created!")
@@ -137,7 +140,7 @@ def register_user():
 @app.route('/login')
 def login():    
 
-    return render_template("login.html")
+    return render_template("login.html", create_account_link="/create-new-account.html")
 
 
 @app.route("/homepage", methods=["POST"])
@@ -146,20 +149,27 @@ def login():
 def handle_login():
     #access user's email and passwords from login form and store in variables
     email = request.form["email"]
-    password = request.form["password"]
     #access the user's email from database
     user = crud.get_user_by_email(email)
-    #if the username/passwords inputted don't match the record, ask user to try again
-    if not user or user.password != password:
-        flash("The email or password you entered was incorrect. Please try again.")
-        return redirect('/login')
-    else:
-        # Log in user by storing the user's email in session, redirect to homepage
-        session["user_email"] = user.email
-        session["user_id"] = user.user_id
-        flash(f"Welcome back, {user.user_name}!")
 
-    return redirect('/homepage')
+#if there's a user, grab the password to see if it matches, if not skip and redirect 
+    if user:
+        password = request.form["password"]
+        if check_password_hash(user.password, password):
+            session["user_email"] = user.email
+            session["user_id"] = user.user_id
+            flash(f"Welcome back, {user.user_name}!")
+            return redirect('/homepage')
+        else:
+            flash(f"Incorrect password.")
+            return redirect('/login')
+    else:
+        flash(f"Email address doesn't match any users.")
+        return redirect('/login')
+
+
+
+    
 
 
 @app.route("/logout")
@@ -171,9 +181,9 @@ def logout():
 
 
 ###################################################################################
+#garment adder form route
 @app.route("/usersGarments", methods=['POST'])
 def userGarments():
-# melon = request.json.get('melon_type')
     garment_type = request.json.get('garment_type')
     garment_description = request.json.get('garment_description')
     temperature_rating = request.json.get('temperature_rating')
@@ -184,6 +194,36 @@ def userGarments():
 #cute little return post card
     return jsonify({'message': 'Garment added!'})
 
+#user account update form route
+@app.route('/accountDetailsUpdater', methods=['POST'])
+def accountDetails():
+    email = request.json.get('email')
+    user_name = request.json.get('username')
+    password = request.json.get('password')
+    homeZip = request.json.get('homeZip')
+    workZip = request.json.get('workZip')
+    otherZip = request.json.get('otherZip')
+    #grab user who is logged in from the database 
+    user = User.query.filter(session['user_email'] == User.email).first()
+
+    #ACCOUNT FOR IF THE USER DOESN'T UPDATE ALL THE DETAILS
+    if email != '':
+        user.email = email
+    if user_name != '':
+        user.user_name = user_name
+    if password != '':
+        user.password = password
+    if homeZip != '':
+        user.homeZip = homeZip
+    if workZip != '':
+        user.workZip = workZip
+    if otherZip != '':
+        user.otherZip = otherZip
+
+    #don't need to add just commit
+    db.session.commit()
+
+    return jsonify({'message': 'Account details updated!'})
 
 
 if __name__ == "__main__":

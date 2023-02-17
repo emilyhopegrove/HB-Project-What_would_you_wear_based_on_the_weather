@@ -13,7 +13,7 @@ The user can now check off garments they have in their wardrobe-->
 <p>Make updates to your user account here.</p>
 <br>
  <!-- Update password -->
- <form method="POST" action="update_password.php">
+ <form id= 'password-update'>
   <label for="old_password">Old Password:</label>
   <input type="password" id="old_password" placeholder="what's your current pw?" name="old_password"><br>
 
@@ -25,7 +25,13 @@ The user can now check off garments they have in their wardrobe-->
   <br>
 </form>
 
-<form action="{{ url_for('account') }}" method="post">
+<!-- do i need another button here too? -->
+<!-- <div>
+  <input type="submit" value="Update password" name="Update password" id= "Update password"/>
+</div> -->
+
+<!-- Update account details -->
+<form id="account-details">
  <!-- Email input -->
  <div class="form-group">
   <label for="email">Email</label>
@@ -48,11 +54,17 @@ The user can now check off garments they have in their wardrobe-->
 </div>
 <!-- Other saved zips input -->
 <div class="form-group">
-  <label for="otherSavedZips">Other Saved Zip</label>
-  <input type="text" class="form-control" id="otherSavedZips" placeholder="update your other saved zip"name="otherSavedZip">
+  <label for="otherZip">Other Saved Zip</label>
+  <input type="text" class="form-control" id="otherZip" placeholder="update your other saved zip" name="otherZip">
+</div>
+<div>
+  <input type="submit" value="Update Account" name="Update Account" id="Update Account"/>
 </div>
 </form>  
+
 <br>
+
+
 <br>
     
 <!-- garment selector form -->
@@ -97,6 +109,7 @@ Then tell us what type of temperature you wear it for.</p>
     </select>
   </div>
 
+  <!-- do i need to make this button just for garments? and update in the other stuff with json etc... -->
   <br>
     <div>
       <input type="submit" value="Update Account" name="Update Account"/>
