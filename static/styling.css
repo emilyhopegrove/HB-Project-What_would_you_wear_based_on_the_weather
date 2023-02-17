@@ -1,0 +1,22 @@
+/* form styling for the alignment/stacking for the user's garment input form on account.html */
+form div {
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: inline-block;
+    width: 120px;
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  input[type="text"],
+  select {
+    width: 200px;
+    display: block;
+  }
+
+  input[type="radio"] {
+    display: inline-block;
+    width: auto;
+  }

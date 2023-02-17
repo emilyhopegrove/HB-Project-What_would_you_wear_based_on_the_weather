@@ -1,6 +1,8 @@
+
 <!-- this page will display the user's profile information including their email, username, password, option to change
 these things and up to 3 preferred zip/locations to save their home, work and other regular location for ease of use
 The user can now check off garments they have in their wardrobe-->
+
 
 {% extends 'base.html' %}
 
@@ -9,355 +11,102 @@ The user can now check off garments they have in their wardrobe-->
 
 <h2>User Account</h2>
 <p>Make updates to your user account here.</p>
-<!-- Login form with password update option -->
-<form action="{{ url_for('account') }}" method="post">
-    <!-- Email input -->
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" name="email">
-    </div>
-    <!-- Username input -->
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" name="username">
-    </div>
-    <!-- Password update checkbox -->
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="updatePassword" name="updatePassword">
-      <label class="form-check-label" for="updatePassword">Update Password</label>
-    </div>
-    <!-- Current password input (only shown if update password is checked) -->
-    <div class="form-group password-update" style="display: none;">
-      <label for="currentPassword">Current Password</label>
-      <input type="password" class="form-control" id="currentPassword" name="currentPassword">
-    </div>
-    <!-- New password input (only shown if update password is checked) -->
-    <div class="form-group password-update" style="display: none;">
-      <label for="newPassword">New Password</label>
-      <input type="password" class="form-control" id="newPassword" name="newPassword">
-    </div>
-    <!-- Home zip input -->
-    <div class="form-group">
-      <label for="homeZip">Home Zip</label>
-      <input type="text" class="form-control" id="homeZip" name="homeZip">
-    </div>
-    <!-- Work zip input -->
-    <div class="form-group">
-      <label for="workZip">Work Zip</label>
-      <input type="text" class="form-control" id="workZip" name="workZip">
-    </div>
-    <!-- Other saved zips input -->
-    <div class="form-group">
-      <label for="otherSavedZips">Other Saved Zip</label>
-      <input type="text" class="form-control" id="otherSavedZips" name="otherSavedZip">
-    </div>
+<br>
+ <!-- Update password -->
+ <form method="POST" action="update_password.php">
+  <label for="old_password">Old Password:</label>
+  <input type="password" id="old_password" placeholder="what's your current pw?" name="old_password"><br>
 
-<!-- TODO add in the garment selector form -->
+  <label for="new_password">New Password:</label>
+  <input type="password" id="new_password" placeholder="update your pw" name="new_password"><br>
+
+  <label for="confirm_password">Confirm New Password:</label>
+  <input type="password" id="confirm_password" placeholder="match your new pw" name="confirm_password"><br>
+  <br>
+</form>
+
+<form action="{{ url_for('account') }}" method="post">
+ <!-- Email input -->
+ <div class="form-group">
+  <label for="email">Email</label>
+  <input type="email" class="form-control" id="email" placeholder="update your email" name="email">
+</div>
+<!-- Username input -->
+<div class="form-group">
+  <label for="username">Username</label>
+  <input type="text" class="form-control" id="username" placeholder="update your username" name="username">
+</div>
+<!-- Home zip input -->
+<div class="form-group">
+  <label for="homeZip">Home Zip</label>
+  <input type="text" class="form-control" id="homeZip" placeholder="update your home zip" name="homeZip">
+</div>
+<!-- Work zip input -->
+<div class="form-group">
+  <label for="workZip">Work Zip</label>
+  <input type="text" class="form-control" id="workZip" placeholder="update your work zip" name="workZip">
+</div>
+<!-- Other saved zips input -->
+<div class="form-group">
+  <label for="otherSavedZips">Other Saved Zip</label>
+  <input type="text" class="form-control" id="otherSavedZips" placeholder="update your other saved zip"name="otherSavedZip">
+</div>
+</form>  
+<br>
+<br>
+    
+<!-- garment selector form -->
 
 <h2>What's In Your Wardrobe?</h2>
-<p>Please check off what you have in your wardrobe 
-so we can make a customized outfit for you!</p>
+<p>Please tell us what you have in your wardrobe 
+so we can make a customized outfit for you! <br>
+For the description tell us the color, and type of clothing it is. <br>
+Then tell us what type of temperature you wear it for.</p>
 
 
-<div class="accordion" id="accordionCategories">
-  <div class="card">
-    <div class="card-header" id="headingTops">
-      <h2 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTops" aria-expanded="true" aria-controls="collapseTops">
-          Tops
-        </button>
-      </h2>
-    </div>
-    <div id="collapseTops" class="collapse show" aria-labelledby="headingTops" data-parent="#accordionCategories">
-      <div class="card-body">
-    
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Tops</th>
-            <th scope="col">Garment</th>
-            <th scope="col">Weather Condition</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                  <label class="custom-control-label" for="customCheck1">1</label>
-              </div>
-            </td>
-            <td>Tank top</td>
-            <td>Hot(80+)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck2">
-                  <label class="custom-control-label" for="customCheck2">2</label>
-              </div>
-            </td>
-            <td>Sleevless top</td>
-            <td>Hot(80+)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck3">
-                  <label class="custom-control-label" for="customCheck3">3</label>
-              </div>
-            </td>
-            <td>Polo shirt</td>
-            <td>Warm(56-79)</td>
-          </tr>
-          
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck4">
-                  <label class="custom-control-label" for="customCheck4">4</label>
-              </div>
-            </td>
-            <td>Graphic Tee</td>
-            <td>Warm(56-79)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck5">
-                  <label class="custom-control-label" for="customCheck5">5</label>
-              </div>
-            </td>
-            <td>Turtleneck</td>
-            <td>Cold(55-)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck6">
-                  <label class="custom-control-label" for="customCheck6">6</label>
-              </div>
-            </td>
-            <td>Hoodie</td>
-            <td>Cold(55-)</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-        </div>
-    </div>
+<h3>My Wardrobe Tracker</h3>
+
+<form id="add-garment">
+  <p>What type of garment do you have?</p>
+  <div>
+    <label for="garment-type">Garment Type:</label>
+    <select id="garment-type" name="garment-type">
+      <option value="tops">Tops</option>
+      <option value="bottoms">Bottoms</option>
+      <option value="footwear">Footwear</option>
+      <option value="outerwear">Outerwear</option>
+      <option value="accessories">Accessories</option>
+    </select>
   </div>
 
-   <div class="card">
-    <div class="card-header" id="headingBottoms">
-      <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseBottoms" aria-expanded="false" aria-controls="collapseBottoms">
-          Bottoms
-        </button>
-      </h2>
-    </div>
-    <div id="collapseBottoms" class="collapse" aria-labelledby="headingBottoms" data-parent="#accordionCategories">
-      <div class="card-body">
-        <div class="container">
-  <div class="row">
-    <div class="col-12">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Bottoms</th>
-            <th scope="col">Garment</th>
-            <th scope="col">Weather Condition</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck7" checked>
-                  <label class="custom-control-label" for="customCheck7">7</label>
-              </div>
-            </td>
-            <td>Shorts</td>
-            <td>Hot(80+)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck8">
-                  <label class="custom-control-label" for="customCheck8">8</label>
-              </div>
-            </td>
-            <td>Denim cutoffs</td>
-            <td>Hot(80+)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck9">
-                  <label class="custom-control-label" for="customCheck9">9</label>
-              </div>
-            </td>
-            <td>Capri pants</td>
-            <td>Warm(56-79)</td>
-          </tr>
-          
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck10">
-                  <label class="custom-control-label" for="customCheck10">10</label>
-              </div>
-            </td>
-            <td>Goucho pants</td>
-            <td>Warm(56-79)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck11">
-                  <label class="custom-control-label" for="customCheck11">11</label>
-              </div>
-            </td>
-            <td>Jeans</td>
-            <td>Cold(55-)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck12">
-                  <label class="custom-control-label" for="customCheck12">12</label>
-              </div>
-            </td>
-            <td>Leggings</td>
-            <td>Cold(55-)</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div>
+    <label for="garment-description">Garment Description:</label>
+    <input type="text" id="garment-description" name="garment-description" />
   </div>
-</div>
-      </div>
-    </div>
+
+  <div>
+    <p>Do you wear it in hot, warm, cold or freezing weather?
+      <br>
+    </p>
+    <label for="temperature-rating">Temperature</label>
+    <select id="temperature-rating" name="temperature-rating">
+      <option value="hot">Hot</option>
+      <option value="warm">Warm</option>
+      <option value="cold">Cold</option>
+      <option value="freezing">Freezing</option>
+    </select>
   </div>
-    
 
-
-       <div class="card">
-    <div class="card-header" id="headingFootwear">
-      <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFootwear" aria-expanded="false" aria-controls="collapseFootwear">
-          Footwear
-        </button>
-      </h2>
+  <br>
+    <div>
+      <input type="submit" value="Update Account" name="Update Account"/>
     </div>
-    <div id="collapseFootwear" class="collapse" aria-labelledby="headingFootwear" data-parent="#accordionCategories">
-      <div class="card-body">
-        <div class="container">
-  <div class="row">
-    <div class="col-12">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Footwear</th>
-            <th scope="col">Garment</th>
-            <th scope="col">Weather Condition</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck13" checked>
-                  <label class="custom-control-label" for="customCheck13">13</label>
-              </div>
-            </td>
-            <td>Sandals</td>
-            <td>Hot(80+)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck14">
-                  <label class="custom-control-label" for="customCheck14">14</label>
-              </div>
-            </td>
-            <td>Flip-flops</td>
-            <td>Hot(80+)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck15">
-                  <label class="custom-control-label" for="customCheck15">15</label>
-              </div>
-            </td>
-            <td>Sneakers</td>
-            <td>Warm(56-79)</td>
-          </tr>
-          
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck16">
-                  <label class="custom-control-label" for="customCheck16">16</label>
-              </div>
-            </td>
-            <td>Loafers</td>
-            <td>Warm(56-79)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck17">
-                  <label class="custom-control-label" for="customCheck17">17</label>
-              </div>
-            </td>
-            <td>Warm-lined boots</td>
-            <td>Cold(55-)</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck18">
-                  <label class="custom-control-label" for="customCheck18">18</label>
-              </div>
-            </td>
-            <td>Winter sneakers</td>
-            <td>Cold(55-)</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-      </div>
-    </div>
-  </div>
-    
-
+    <br>
+    <br>
+</form>
 <br>
 <br>
 
-    <!-- Submit button -->
-    <button type="submit" class="btn btn-primary">Update Account</button>
-  </form>
-  
-  <!-- JavaScript to toggle password update fields -->
-  <script>
-    document.getElementById('updatePassword').addEventListener('change', function() {
-      let passwordUpdate = document.querySelectorAll('.password-update');
-      for (let i = 0; i < passwordUpdate.length; i++) {
-        passwordUpdate[i].style.display = this.checked ? 'block' : 'none';
-      }
-    });
-  </script>
-
-
+<script src="/static/js.js"></script>
   
 {% endblock %}

@@ -70,9 +70,6 @@ class Garment(db.Model):
     types = db.Column(db.String(50),
                   nullable = False)
 
-    style = db.Column(db.String(50),
-                  nullable = False)
-
     style_description = db.Column(db.Text,
                               nullable = False)
     #'hot' 'warm' or 'cold' are temp ratings 

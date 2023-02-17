@@ -9,6 +9,7 @@ from jinja2 import StrictUndefined
 import requests
 
 
+
 app = Flask(__name__)
 #TODO if you deploy hide the secret_key below and keep it secret
 app.secret_key = 'thisisacutestring'
@@ -69,11 +70,21 @@ def workOutfit(location):
 #AirBnB application ^
 ################################################################
 
-@app.route('/account')
-def account():
-    "Where the user can update account information like password"
 
-    return render_template("account.html")
+
+
+@app.route('/account', methods=['GET', 'POST'])
+def account():
+    if 'user_email' not in session:
+        return redirect('/login')
+
+   
+    return render_template('account.html')
+
+    
+
+
+    
 
 @app.route('/create-new-account')
 def create_new_account():
@@ -103,7 +114,7 @@ def register_user():
     if zip_work == '':
         zip_work = None
 
-    print('work zip =', zip_work)
+    #print('work zip =', zip_work)
     zip_other = request.form.get('otherZips')
     if zip_other == '':
         zip_other = None
@@ -116,7 +127,7 @@ def register_user():
         user = crud.create_user(email, password, user_name, zip_home, zip_work, zip_other)
         db.session.add(user)
         db.session.commit()
-        flash("Account created! It's time to log in.")
+        flash("Account created!")
 
     return redirect("/homepage")
 
@@ -160,10 +171,22 @@ def logout():
 
 
 ###################################################################################
+@app.route("/usersGarments", methods=['POST'])
+def userGarments():
+# melon = request.json.get('melon_type')
+    garment_type = request.json.get('garment_type')
+    garment_description = request.json.get('garment_description')
+    temperature_rating = request.json.get('temperature_rating')
+#creating a garment and adding to database
+    garment = crud.create_garment(garment_type, garment_description, temperature_rating, session['user_id'])
+    db.session.add(garment)
+    db.session.commit()
+#cute little return post card
+    return jsonify({'message': 'Garment added!'})
 
 
 
 if __name__ == "__main__":
-    connect_to_db(app)
+    connect_to_db(app) 
     app.app_context().push()
     app.run(host="0.0.0.0", debug=True)

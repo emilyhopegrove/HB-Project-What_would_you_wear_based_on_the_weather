@@ -3,7 +3,7 @@
 from model import db, User, Garment, Outfit, connect_to_db 
 import requests
 
-# outfits dictionary
+# Default outfits dictionary
 #hot outfits
 hotOutfit = {
     "top": "T-Shirt",
@@ -76,12 +76,11 @@ def create_user(email, password, user_name, zip_home, zip_work, zip_other):
 
 
 
-def create_garment(types, style, style_description, temp_rating, user_id):
+def create_garment(types, style_description, temp_rating, user_id):
     """"create and return garments"""
 
     garment = Garment(
         types=types, 
-        style=style, 
         style_description=style_description, 
         temp_rating=temp_rating,
         user_id=user_id,
