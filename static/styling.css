@@ -1,7 +1,109 @@
-/* form styling for the alignment/stacking for the user's garment input form on account.html */
-form div {
-    margin-bottom: 10px;
+/* Define a container element with flex layout */
+
+.container {
+display: flex;
+/* Align the divs to the left and right edges of the container  */
+justify-content: space-between; 
+align-items: center; 
+/* Place the divs vertically */
+flex-direction: column; 
+}
+
+
+
+/* Define the update-account div */
+.update-account {
+width: 50%;
+border: 1px solid #88BBD6;
+padding: 10px;
+border-radius: 5px;
+float: right;
+}
+
+/* Define the labels for the account details fields */
+#account-details label {
+display: block;
+margin-bottom: 5px;
+}
+
+/* Define the input fields for the account details */
+#account-details input[type="email"],
+#account-details input[type="text"],
+#account-details input[type="password"] {
+width: 100%;
+padding: 5px;
+margin-bottom: 10px;
+border-radius: 5px;
+}
+
+/* Define the styling for the submit buttons */
+#account-details input[type="submit"],
+#add-garment input[type="submit"]
+
+{
+display: block;
+margin: 0 auto;
+background-color: #88BBD6;
+border: none;
+color: white;
+padding: 10px 20px;
+font-size: 16px;
+border-radius: 5px;
+cursor: pointer;
+}
+
+/* Define the styling for the account-title div */
+.account-title {
+text-align: center;
+margin-bottom: 20px;
+}
+
+/* Define the styling for the password-details div */
+.password-details {
+float: left;
+width: 50%;
+}
+
+/* Define the styling for the update-account div */
+.update-account {
+float: right;
+width: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  .password-details {
+    width: 50%; /* set the width of the div */
+    margin: 0 auto 0 0; /* set the right margin to auto and the others to 0 */
+  } 
+
+  .password-details, .update-account {
+    display: inline-block;
+    width: 45%; /* adjust this value as needed */
+    vertical-align: top; /* to align them to the top of their container */
+    
   }
+
+  .form-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-group label {
+    margin-right: 10px;
+    text-align: right;
+    flex-basis: 100px;
+  }
+  
 
   label {
     display: inline-block;
@@ -14,6 +116,14 @@ form div {
   select {
     width: 200px;
     display: block;
+    outline: none;
+    border: 2px solid #88BBD6;
+  }
+   
+  input[type="text"]:focus,
+  select:focus {
+    outline: none;
+    border: 2px solid #88BBD6;
   }
 
   input[type="radio"] {
@@ -29,11 +139,12 @@ form div {
   }
 /* image styling */
   .outfit-image {
-    width: 50%; 
-    height: 50%; 
-    border: solid 1px black;
+    width: 60%; 
+    height: 60%; 
+    border: solid 3px #88BBD6;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-    float: right;
+    float: center;
+    border-radius: 10px;
    
 
   }
@@ -55,9 +166,21 @@ body {
 
 /* buttons on homepage for home and work zip codes */
 .tablinks {
-  background-color: #CDCDCD;
+  background-color: #88BBD6;
+  border-radius: 10px;
 }
 
 .tablinks:active {
   outline-color: #FFFF1C;
+  border-radius: 10px;
+}
+
+/* login logout buttons */
+
+.login-logout-btn {
+  outline-color: #88BBD6;
+}
+
+.login-logout-btn:active {
+  outline-color:#FFFF1C;
 }

@@ -80,14 +80,14 @@ def create_user(email, password, user_name, zip_home, zip_work, zip_other):
 
 
 
-def create_garment(types, style, style_description, temp_rating):
+def create_garment(types, style_description, temp_rating, user_id):
     """"create and return garments"""
 
     garment = Garment(
         types=types, 
-        style=style, 
         style_description=style_description, 
         temp_rating=temp_rating,
+        user_id=user_id,
         )
 
     return garment
@@ -261,9 +261,9 @@ def choose_outfit_by_weather(geocode_params, api_key, geocode_url):
     elif second_temp == 'freezing':
         outfit_to_check = freezingOutfit
 
-    for key in outfit_to_check:
-        if key not in garments:
-            garments[key] = outfit_to_check[key]
+    # for key in outfit_to_check:
+    #     if key not in garments:
+    #         garments[key] = outfit_to_check[key]
 
     #combine results with garments, icons and outfits 
     result['garments'] = garments

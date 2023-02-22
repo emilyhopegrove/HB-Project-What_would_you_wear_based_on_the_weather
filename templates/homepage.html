@@ -25,10 +25,12 @@
   <!-- Create a container for the tab content (work and home zip buttons) -->
   <div id="tabContent" class="tabcontent">
     <h3 id="zipCode"></h3>
-      <div class="row">
+
+      <div class="row-10">
         <span id="temperature" class="col-6"></span>
-          <img src="static/images/icon-freezing-snow.png" class='weather-icon col-3'>
+          <img src="static/images/icon-freezing-snow.png" class='weather-icon col-6'>
       </div>
+
     <h4>Your Outfit Suggestion:</h4><br>
     <ul id="garments">
     </ul>
@@ -81,6 +83,7 @@
     }
   
     // Add event listeners to the tab buttons to display the weather data for the home zip code
+    
     document.querySelector('#homeTab').addEventListener('click', function() { 
         fetch('/outfit/zip_home')
             .then(response => {
@@ -115,7 +118,7 @@
                 return response.json();
             })
             .then(data => {
-                document.querySelector('#temperature').innerHTML=`this is your temperature for today: ${data.temperature}`
+                document.querySelector('#temperature').innerHTML=`Today's Temp: ${data.temperature}`
                 const outfitDisplay = document.querySelector('#garments')
                 //disallowing children from multiplying with multiple button presses
                 outfitDisplay.innerHTML = ''
