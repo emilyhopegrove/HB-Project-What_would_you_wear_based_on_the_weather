@@ -9,38 +9,65 @@
     The tab buttons each have an event listener that calls the getWeatherData function 
     for the corresponding zip code, and then calls the openTab function to display the content
     for that zip code. The openTab function hides all elements with the class-->
-
+<div class="container">
+  <div class="row">
+  <div class="col-6">
 <!-- greet the user -->
-<h1>Hello, {{user.user_name}}!</h1>
+<h1>Hello {{user.user_name}}!</h1>
 
 <!-- Create a container for the tab buttons -->
-<div class="tab">
+  <div class="tab">
     <button class="tablinks" id="homeTab">Home</button>
     <button class="tablinks" id="workTab">Work</button>
     <!-- <button class="tablinks" id="otherTab">Other</button> -->
   </div>
   
-  <!-- Create a container for the tab content -->
+  <!-- Create a container for the tab content (work and home zip buttons) -->
   <div id="tabContent" class="tabcontent">
     <h3 id="zipCode"></h3>
-    <p id="temperature"></p>
-  
-    <h3>Your Outfit Suggestion:</h3><br>
+      <div class="row">
+        <span id="temperature" class="col-6"></span>
+          <img src="static/images/icon-freezing-snow.png" class='weather-icon col-3'>
+      </div>
+    <h4>Your Outfit Suggestion:</h4><br>
     <ul id="garments">
     </ul>
+
   </div>
+  <!-- loading image use as default / space holder -->
+  <!-- <section id="loading">
+      <img src="static/images/wait-1.1s-200px.svg"> 
+  </section> -->
+
   
+</div>
+<div class="col-6">
+  <section id="weather-outfit">
+    <img src="static/images/outfit-cold_what-to-wear_hamza-nouasria-unsplash.jpeg" class="outfit-image">  
+  </section>
+</div>
   <script>
-    function displayWeatherData(zipCode, temperature, garments) {
-      //alert('hey!!!!!!!!!!!')
-        document.querySelector('#zipCode').innerHTML = `Today's forecast for your ${zipCode}:`;
-      document.querySelector('#temperature').innerHTML = `The temp is: ${temperature}`;
-      let garmentList = "";
-      for (const garment of garments) {
-        garmentList += `<li>${garment}</li>`;
-      }
-      document.querySelector('#garments').innerHTML = garmentList;
-    }
+    //THIS FUNCTION DOES NOT APPEAR TO BE WORKING/NEEDED
+    // function displayWeatherData(zipCode, temperature, garments) {
+    //   //alert('hey!!!!!!!!!!!')
+    //   document.querySelector('#zipCode').innerHTML = `Today's forecast for your ${zipCode}:`;
+    //   document.querySelector('#temperature').innerHTML = `The temp is: ${temperature}`;
+    //   //update outfit image 
+    //   document.querySelector('#weather-outfit img')
+    //           .setAttribute('src', '')
+    //   //update weather icon image
+    //   document.querySelector('#weather-icon img')
+    //           .setAttribute('src', '')        
+    //   //need another querySelector to put in the images
+    //   // .querySelector('#shark-img img')
+    //   //     .setAttribute('src', `/static/images/guess${numWrong}.png`);
+
+    //   let garmentList = "";
+    //   for (const garment of garments) {
+    //     garmentList += `<li>${garment}</li>`;
+    //   }
+    //   document.querySelector('#garments').innerHTML = garmentList;
+    // }
 
     //add getweatherdata to airbnb application. put this on to the homepage and make the homepage work
 //   create a function that allows the user to toggle between work and home zip code weather data and corresponding outfits
@@ -63,14 +90,15 @@
                 return response.json();
             })
             .then(data => {
-                document.querySelector('#temperature').innerHTML=`this is your temperature for today: ${data.temperature}`
+                document.querySelector('#temperature').innerHTML=`Today's Temp: ${data.temperature}`
                 const outfitDisplay = document.querySelector('#garments')
                 //disallowing children from multiplying with multiple button presses
                 outfitDisplay.innerHTML = ''
 
                 for (const garment in data.garments) {
                     outfitDisplay.insertAdjacentHTML("beforeend",`<li>${data.garments[garment]}</li>`);
-                }          
+                } 
+            
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
@@ -104,33 +132,7 @@
     
     });
     
-  
-
-    // document.querySelector('#otherTab').addEventListener('click', function() {
-    //   getWeatherData('other');
-    //   openTab('other');
-    // });
-  
-    // Function to open the selected tab
-    // function openTab(zipCode) {
-    //   // Get all elements with class="tabcontent" and hide them
-    //   let tabContent = document.getElementsByClassName("tabcontent");
-    //   for (let i = 0; i < tabContent.length; i++) {
-    //     // tabContent[i].style.display = "none";
-    //   }
-  
-    //   // Show the current tab
-    //   console.log("zipcode", zipCode)
-    //   document.getElementById(zipCode).style.display = "block";
-    // }
-  
-    // Display the home tab by default
-    // openTab('home');
-  //</script>
-
-
-
-
-
-
+  </script>
+</div>
+</div>
   {% endblock %}

@@ -2,9 +2,8 @@
 
 from model import db, User, Garment, Outfit, connect_to_db 
 import requests
-import random
 
-# Default outfits dictionary
+# outfits dictionary
 #hot outfits
 hotOutfit = {
     "top": "T-Shirt",
@@ -52,13 +51,17 @@ freezingOutfit = {
     "Accessories": "Hat, gloves and a scarf!"
 }
 
-
-
-
-
-
-
-
+# outfit images
+cold_outfit_img = "/static/images/outfit-cold_what-to-wear_hamza-nouasria-unsplash.jpeg"
+freezing_outfit_img = "/static/images/outfit-freezing_what-to-wear_raphael-nast-unsplash.jpeg"
+warm_outfit_img = "/static/images/outfit-warm_what-to-wear_laura-chouette-unsplash.jpeg"
+hot_outfit_img = "/static/images/outfit-hot_what-to-wear_ana-itonishvili-unsplash.jpeg"
+#weather icon images
+rain_icon = "/static/images/icon-hot-warm-rain.png"
+hot_warm_icon = "/static/images/icon-hot-warm-day.png"
+freezing_snow_icon = "/static/images/icon-freezing-snow.png"
+#loading icon image
+loading_icon = "/static/images/wait-1.1s-200px.svg"
 
 def create_user(email, password, user_name, zip_home, zip_work, zip_other):
     """Create and return a new user"""
@@ -77,14 +80,14 @@ def create_user(email, password, user_name, zip_home, zip_work, zip_other):
 
 
 
-def create_garment(types, style_description, temp_rating, user_id):
+def create_garment(types, style, style_description, temp_rating):
     """"create and return garments"""
 
     garment = Garment(
         types=types, 
+        style=style, 
         style_description=style_description, 
         temp_rating=temp_rating,
-        user_id=user_id,
         )
 
     return garment
@@ -114,18 +117,11 @@ def get_user_by_username(username):
     getting user from database using their username
     """
 
-    user = User.query.filter(username == User.user_name).first()
+    user = User.query.filter(username == User.username).first()
     return user
 
 
-
-
 def choose_outfit_by_weather(geocode_params, api_key, geocode_url):
-#make a randomizer
-# make into sql alchemy syntax query the database based on the weather SELECT * FROM garments WHERE user_id=3, and style = top and temperature = hot
-    #return a list tops[] bottoms[] footwear[]
-    #then use the python random.choice 
-
 
     response = requests.get(geocode_url, params=geocode_params)
 
@@ -168,7 +164,10 @@ def choose_outfit_by_weather(geocode_params, api_key, geocode_url):
                 snow = True
         high_temp = weather_info['main']['temp_max']
         low_temp = weather_info['main']['temp_min']
+        #if low temp is __ add this image, if low temp is ___ add that image, add image url to results
         
+        
+
         result = {
             "temperature": temperature,
             "precip": precip,
@@ -177,18 +176,39 @@ def choose_outfit_by_weather(geocode_params, api_key, geocode_url):
             "low_temp": low_temp
         }
     
+#Recommended Outfit
+#     This function takes a dictionary as input, which contains high_temp, low_temp, and precip,
+#     and returns a dictionary which combines the result dictionary with the recommended outfit.
+    
+#     result: dict
+#         Dictionary that contains high_temp, low_temp, and precip conditions pulled from API
+        
+#     Returns: dict
+#         A dictionary that contains current local weather conditions, 
+#         and recommended outfit to be displayed to the user
+#   
+#this will eventually get tucked into a function and/or put into crud and called here for tidiness sake
     temps_for_day = set()
     temps = [result["high_temp"], result["low_temp"]]
-
+    outfit = ''
+    icon = ''
     for temp in temps:
         if temp >= 80:
             temps_for_day.add('hot')
+            outfit = hot_outfit_img
+            icon = hot_warm_icon
         elif temp >= 56:
             temps_for_day.add('warm')
+            outfit = warm_outfit_img
+            icon = hot_warm_icon
         elif temp >= 33:
             temps_for_day.add('cold')
+            outfit = cold_outfit_img
+            icon = freezing_snow_icon
         else:
             temps_for_day.add('freezing')
+            outfit = freezing_outfit_img
+            icon = freezing_snow_icon
 
     garments = {}
 
@@ -245,9 +265,10 @@ def choose_outfit_by_weather(geocode_params, api_key, geocode_url):
         if key not in garments:
             garments[key] = outfit_to_check[key]
 
-    #combine results with garments 
+    #combine results with garments, icons and outfits 
     result['garments'] = garments
-
+    result['icon'] = icon
+    result['outfit'] = outfit
     return result
 
 
@@ -258,5 +279,3 @@ if __name__ == "__main__":
     from server import app
     connect_to_db(app)
     app.app_context().push
-
-        

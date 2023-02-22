@@ -387,3 +387,8 @@ print(f"Based on your local weather conditions today you should wear: {garments.
 
 
 
+
+
+
+
+
