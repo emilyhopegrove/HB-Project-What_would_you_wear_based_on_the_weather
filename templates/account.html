@@ -7,119 +7,128 @@ The user can now check off garments they have in their wardrobe-->
 {% extends 'base.html' %}
 
 {% block content %}
-
-
-<h2>User Account</h2>
-<p>Make updates to your user account here.</p>
-<br>
- <!-- Update password -->
- <form id= 'password-update'>
-  <label for="old_password">Old Password:</label>
-  <input type="password" id="old_password" placeholder="what's your current pw?" name="old_password"><br>
-
-  <label for="new_password">New Password:</label>
-  <input type="password" id="new_password" placeholder="update your pw" name="new_password"><br>
-
-  <label for="confirm_password">Confirm New Password:</label>
-  <input type="password" id="confirm_password" placeholder="match your new pw" name="confirm_password"><br>
+<container>
+<div class="update-account">
+  <h2>User Account</h2>
+  <p>Make updates to your user account here.</p>
   <br>
-</form>
-
-<!-- do i need another button here too? -->
-<!-- <div>
-  <input type="submit" value="Update password" name="Update password" id= "Update password"/>
-</div> -->
-
-<!-- Update account details -->
-<form id="account-details">
- <!-- Email input -->
- <div class="form-group">
-  <label for="email">Email</label>
-  <input type="email" class="form-control" id="email" placeholder="update your email" name="email">
-</div>
-<!-- Username input -->
-<div class="form-group">
-  <label for="username">Username</label>
-  <input type="text" class="form-control" id="username" placeholder="update your username" name="username">
-</div>
-<!-- Home zip input -->
-<div class="form-group">
-  <label for="homeZip">Home Zip</label>
-  <input type="text" class="form-control" id="homeZip" placeholder="update your home zip" name="homeZip">
-</div>
-<!-- Work zip input -->
-<div class="form-group">
-  <label for="workZip">Work Zip</label>
-  <input type="text" class="form-control" id="workZip" placeholder="update your work zip" name="workZip">
-</div>
-<!-- Other saved zips input -->
-<div class="form-group">
-  <label for="otherZip">Other Saved Zip</label>
-  <input type="text" class="form-control" id="otherZip" placeholder="update your other saved zip" name="otherZip">
-</div>
-<div>
-  <input type="submit" value="Update Account" name="Update Account" id="Update Account"/>
-</div>
-</form>  
-
-<br>
-
-
-<br>
-    
-<!-- garment selector form -->
-
-<h2>What's In Your Wardrobe?</h2>
-<p>Please tell us what you have in your wardrobe 
-so we can make a customized outfit for you! <br>
-For the description tell us the color, and type of clothing it is. <br>
-Then tell us what type of temperature you wear it for.</p>
-
-
-<h3>My Wardrobe Tracker</h3>
-
-<form id="add-garment">
-  <p>What type of garment do you have?</p>
-  <div>
-    <label for="garment-type">Garment Type:</label>
-    <select id="garment-type" name="garment-type">
-      <option value="tops">Tops</option>
-      <option value="bottoms">Bottoms</option>
-      <option value="footwear">Footwear</option>
-      <option value="outerwear">Outerwear</option>
-      <option value="accessories">Accessories</option>
-    </select>
+   <!-- Update password -->
+   <form id= 'password-update'>
+    <label for="old_password">Old Password:</label>
+    <input type="password" id="old_password" placeholder="what's your current pw?" name="old_password"><br>
+  
+    <label for="new_password">New Password:</label>
+    <input type="password" id="new_password" placeholder="update your pw" name="new_password"><br>
+  
+    <label for="confirm_password">Confirm New Password:</label>
+    <input type="password" id="confirm_password" placeholder="match your new pw" name="confirm_password"><br>
+    <br>
+  </form>
+  
+  <!-- Update account details -->
+  <form id="account-details">
+   <!-- Email input -->
+   <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" placeholder="update your email" name="email">
   </div>
-
-  <div>
-    <label for="garment-description">Garment Description:</label>
-    <input type="text" id="garment-description" name="garment-description" />
+  <!-- Username input -->
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" placeholder="update your username" name="username">
   </div>
-
+  <!-- Home zip input -->
+  <div class="form-group">
+    <label for="homeZip">Home Zip</label>
+    <input type="text" class="form-control" id="homeZip" placeholder="update your home zip" name="homeZip">
+  </div>
+  <!-- Work zip input -->
+  <div class="form-group">
+    <label for="workZip">Work Zip</label>
+    <input type="text" class="form-control" id="workZip" placeholder="update your work zip" name="workZip">
+  </div>
+  <!-- Other saved zips input -->
+  <div class="form-group">
+    <label for="otherZip">Other Saved Zip</label>
+    <input type="text" class="form-control" id="otherZip" placeholder="update your other saved zip" name="otherZip">
+  </div>
   <div>
-    <p>Do you wear it in hot, warm, cold or freezing weather?
+    <input type="submit" value="Update Account" name="Update Account" id="Update Account"/>
+  </div>
+  </form> 
+
+
+
+
+  <br>
+      
+  <!-- garment selector form -->
+  <div>
+    <h2>What's In Your Wardrobe?</h2>
+    <p>Please tell us what you have in your wardrobe 
+    so we can make a customized outfit for you! <br>
+    For the description tell us the color, and type of clothing it is. <br>
+    Then tell us what type of temperature you wear it for.</p>
+
+
+    <h3>My Wardrobe Tracker</h3>
+
+    <form id="add-garment">
+      <p>What type of garment do you have?</p>
+      <div>
+        <label for="garment-type">Garment Type:</label>
+        <select id="garment-type" name="garment-type">
+          <option value="tops">Tops</option>
+          <option value="bottoms">Bottoms</option>
+          <option value="footwear">Footwear</option>
+          <option value="outerwear">Outerwear</option>
+          <option value="accessories">Accessories</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="garment-description">Garment Description:</label>
+        <input 
+          type="text"
+          class="form-group" 
+          id="garment-description" 
+          name="garment-description" />
+      </div>
+
+      <div>
+        <p>Do you wear it in hot, warm, cold or freezing weather?
+          <br>
+        </p>
+        <label for="temperature-rating">Temperature</label>
+        <select 
+            class="form-group"
+            id="temperature-rating" 
+            name="temperature-rating"
+          >
+          <option value="hot">Hot</option>
+          <option value="warm">Warm</option>
+          <option value="cold">Cold</option>
+          <option value="freezing">Freezing</option>
+        </select>
+      </div>
+
+      <!-- do i need to make this button just for garments? and update in the other stuff with json etc... -->
       <br>
-    </p>
-    <label for="temperature-rating">Temperature</label>
-    <select id="temperature-rating" name="temperature-rating">
-      <option value="hot">Hot</option>
-      <option value="warm">Warm</option>
-      <option value="cold">Cold</option>
-      <option value="freezing">Freezing</option>
-    </select>
+        <div>
+          <input 
+            type="submit" 
+            value="Add Garment" 
+            name="Update Account"
+            />
+        </div>
+        <br>
+        <br>
+    </form>
+    <br>
+    <br>
   </div>
-
-  <!-- do i need to make this button just for garments? and update in the other stuff with json etc... -->
-  <br>
-    <div>
-      <input type="submit" value="Add Garment" name="Update Account"/>
-    </div>
-    <br>
-    <br>
-</form>
-<br>
-<br>
-
+</div>
+</container>
 <script src="/static/js.js"></script>
   
 {% endblock %}

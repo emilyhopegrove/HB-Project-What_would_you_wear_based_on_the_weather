@@ -1,186 +1,314 @@
-/* Define a container element with flex layout */
+/* fonts */
+/* import Karla font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=karla:wght@400;700&display=swap');
 
-.container {
-display: flex;
-/* Align the divs to the left and right edges of the container  */
-justify-content: space-between; 
-align-items: center; 
-/* Place the divs vertically */
-flex-direction: column; 
+/* set font family with Karla as primary and sans-serif as backup */
+body {
+  font-family: 'karla', sans-serif;
 }
 
+/* additional styles for specific elements */
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #333;
+}
 
+p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #666;
+}
+
+/* USER ACCOUNT FORM V */
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  float: left;
+  flex-direction: column;
+}
 
 /* Define the update-account div */
 .update-account {
-width: 50%;
-border: 1px solid #88BBD6;
-padding: 10px;
-border-radius: 5px;
-float: right;
+  width: 50%;
+  border: 1px solid #88BBD6;
+  padding: 10px;
+  border-radius: 5px;
+  float: right;
 }
 
 /* Define the labels for the account details fields */
 #account-details label {
-display: block;
-margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
 /* Define the input fields for the account details */
 #account-details input[type="email"],
 #account-details input[type="text"],
 #account-details input[type="password"] {
-width: 100%;
-padding: 5px;
-margin-bottom: 10px;
-border-radius: 5px;
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  border: 2px solid #88BBD6;
 }
 
 /* Define the styling for the submit buttons */
 #account-details input[type="submit"],
-#add-garment input[type="submit"]
-
-{
-display: block;
-margin: 0 auto;
-background-color: #88BBD6;
-border: none;
-color: white;
-padding: 10px 20px;
-font-size: 16px;
-border-radius: 5px;
-cursor: pointer;
+#add-garment input[type="submit"],
+button[type="submit"] {
+  display: block;
+  margin: 0 auto;
+  background-color: #88BBD6;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Define the styling for the account-title div */
 .account-title {
-text-align: center;
-margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
 }
 
 /* Define the styling for the password-details div */
 .password-details {
-float: left;
-width: 50%;
+  float: left;
+  width: 50%;
 }
 
 /* Define the styling for the update-account div */
 .update-account {
-float: right;
-width: 50%;
+  float: right;
+  width: 50%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-  .password-details {
-    width: 50%; /* set the width of the div */
-    margin: 0 auto 0 0; /* set the right margin to auto and the others to 0 */
-  } 
-
-  .password-details, .update-account {
-    display: inline-block;
-    width: 45%; /* adjust this value as needed */
-    vertical-align: top; /* to align them to the top of their container */
-    
+/* Adjust layout for mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
   }
 
-  .form-group {
+  .password-details,
+  .update-account {
+    float: none;
+    width: 100%;
+  }
+}
+
+/* Accessibility enhancements */
+.form-group {
     display: flex;
     align-items: center;
-  }
-  
-  .form-group label {
+    margin-bottom: 10px;
+}
+
+.form-group label {
     margin-right: 10px;
     text-align: right;
     flex-basis: 100px;
-  }
-  
+    font-size: 16px;
+    font-weight: bold;
+}
 
-  label {
+label {
     display: inline-block;
     width: 120px;
     text-align: right;
     margin-right: 10px;
-  }
-
-  input[type="text"],
-  select {
-    width: 200px;
-    display: block;
-    outline: none;
-    border: 2px solid #88BBD6;
-  }
-   
-  input[type="text"]:focus,
-  select:focus {
-    outline: none;
-    border: 2px solid #88BBD6;
-  }
-
-  input[type="radio"] {
-    display: inline-block;
-    width: auto;
-  }
-
-  div {
-    text-align: left;
-    font-weight: bold;
-    font-family: serif;
     font-size: 16px;
+    font-weight: bold;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 5px;
+    color: #333;
   }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: inherit;
+    color: #333;
+    box-sizing: border-box;
+  }
+  
+  input[type="submit"],
+  button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #88bbd6;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover,
+  button:hover {
+    background-color: #31708f;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  /* USER ACCOUNT FORM ^ */
+  
+  
+
+  
+
+
 /* image styling */
-  .outfit-image {
-    width: 60%; 
-    height: 60%; 
-    border: solid 3px #88BBD6;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-    float: center;
-    border-radius: 10px;
-   
+.outfit-image {
+  width: 60%; 
+  height: 60%; 
+  border: solid 3px #88BBD6;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  border-radius: 10px;
+}
 
-  }
-
-
-
+/* Add alt text for images */
+.outfit-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+ 
 .weather-icon {
   width: 30%;
   height: 30%;
 }
 
 body {
-  background-color: #E9E9E9;
+  background-color: #F4F4F4; /* increase contrast */
 }
 
-.navbar {
+/* Use a semantic header element */
+header {
   background-color: #88BBD6;
 }
 
-/* buttons on homepage for home and work zip codes */
+/* Use semantic nav element */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background:#31708f;
+}
+
+/* BUTTONS */
+/* Use a hover or focus state for buttons */
 .tablinks {
   background-color: #88BBD6;
   border-radius: 10px;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.tablinks:active {
-  outline-color: #FFFF1C;
-  border-radius: 10px;
+.tablinks:hover,
+.tablinks:focus {
+  background-color: #5C8CA7;
 }
 
-/* login logout buttons */
 
+/* Set hover and active/focus styles for the buttons */
+.login-logout-btn a:hover,
+.login-logout-btn a:focus,
+.login-logout-btn a:active {
+  color: #fff; /* change the text color */
+  background-color: #6c757d; /* change the background color */
+  border-color: #6c757d; /* change the border color */
+}
+/* text color */
+.login-logout-btn a {
+  color: #CDCDCD;
+}
+
+/* Change the border color of the buttons */
+.btn-outline-success {
+  border-color: #99D3DF; /* change the border color for the success button */
+}
+
+.btn-outline-danger {
+  border-color: #FFFF1C; /* change the border color for the danger button */
+}
+
+/* Increase font size */
+label,
 .login-logout-btn {
-  outline-color: #88BBD6;
+  font-size: 18px;
 }
 
-.login-logout-btn:active {
-  outline-color:#FFFF1C;
+/* Use semantic main element */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
+
+/* Use a hover or focus state for logout button */
+.login-logout-btn {
+  background-color: transparent;
+  color: #88BBD6;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.login-logout-btn:hover,
+.login-logout-btn:focus {
+  color: #5C8CA7;
+}
+
+/* Add a focus state for all elements */
+*:focus {
+  outline: none;
+  box-shadow: 0 0 3px 2px #88BBD6;
+}
+
+
+.flash-message {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #FFFF1C;
+  background-color: #007bff;
+  border-radius: 5px;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 10px;
+  padding: 5px;
+}
+
+

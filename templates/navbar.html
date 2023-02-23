@@ -1,4 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-#99D3DF">
+  <div class="logo"> 
+    <img src="static/images/EG Logo.png" alt= 'Emily Grove Logo'>
+  </div>
+
     <a class="navbar-brand" href="{{ url_for('homepage') }}">What To Wear Based On The Weather</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" 
     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
@@ -17,10 +21,10 @@
       </ul>
       <div class="login-logout-btn">
         <!-- Login button -->
-        <a href="{{url_for('login')}}" class="btn btn-outline-success btn-primary my-2 my-sm-0">Login</a>
+        <a href="{{url_for('login')}}" class="btn btn-outline btn-primary my-2 my-sm-0 login-btn">Login</a>
         
        <!-- Logout button -->
-       <a href="{{url_for('logout')}}" class="btn btn-outline-danger btn-primary my-2 my-sm-0">Logout</a>
+       <a href="{{url_for('logout')}}" class="btn btn-outline btn-primary my-2 my-sm-0 logout-btn">Logout</a>
      </div>
       <!-- #TODO might uncomment out in future -->
       <!-- <form class="form-inline my-2 my-lg-0">
