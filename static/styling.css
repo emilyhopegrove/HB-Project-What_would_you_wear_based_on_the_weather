@@ -25,7 +25,6 @@ p {
 .container {
   display: flex;
   justify-content: space-between;
-  float: left;
   flex-direction: column;
 }
 
@@ -182,7 +181,7 @@ label {
 
 
 /* image styling */
-.outfit-image {
+.outfit-img {
   width: 60%; 
   height: 60%; 
   border: solid 3px #88BBD6;
@@ -309,6 +308,12 @@ main {
   height: 40px;
   margin-right: 10px;
   padding: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+nav a:hover img {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 
 

@@ -4,6 +4,7 @@
 {% block title %}Welcome to your homepage!{% endblock %}
 
 {% block content %}
+<!-- images -->
 
 <!-- added a container for the tab buttons and a container for the tab content. 
     The tab buttons each have an event listener that calls the getWeatherData function 
@@ -45,7 +46,6 @@
 </div>
 <div class="col-6">
   <section id="weather-outfit">
-    <img src="static/images/outfit-cold_what-to-wear_hamza-nouasria-unsplash.jpeg" class="outfit-image">  
   </section>
 </div>
   <script>
@@ -101,7 +101,17 @@
                 for (const garment in data.garments) {
                     outfitDisplay.insertAdjacentHTML("beforeend",`<li>${data.garments[garment]}</li>`);
                 } 
-            
+                // make the images appear along with the button click
+                const outfitImgDisplay = document.querySelector("#weather-outfit")
+                const weatherIconDisplay = document.querySelector("#icon")
+
+                //disallowing children from multiplying the images (doesn't work with 'empty strings')
+                // weatherIconDisplay = ''
+                // outfitImgDisplay = ''
+
+                outfitImgDisplay.insertAdjacentHTML("beforeend", `<img src=${data.outfit_image}>`);
+                weatherIconDisplay.insertAdjacentHTML("beforeend", `<img src=${icon}>`);
+
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
@@ -125,8 +135,18 @@
 
                 for (const garment in data.garments) {
                     outfitDisplay.insertAdjacentHTML("beforeend",`<li>${data.garments[garment]}</li>`);
-                }          
-            })
+                } 
+                const outfitImgDisplay = document.querySelector("#weather-outfit")
+                const weatherIconDisplay = document.querySelector("#icon")
+                //disallowing children from multiplying the images (doesn't work with 'empty strings')
+                // weatherIconDisplay = ''
+                // outfitImgDisplay = ''
+
+                outfitImgDisplay.insertAdjacentHTML("beforeend", `<img src=${data.outfit_image}>`);
+                weatherIconDisplay.insertAdjacentHTML("beforeend", `<img src=${icon}>`);
+                
+                
+              })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
             });

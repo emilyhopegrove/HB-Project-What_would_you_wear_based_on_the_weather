@@ -56,6 +56,15 @@ cold_outfit_img = "/static/images/outfit-cold_what-to-wear_hamza-nouasria-unspla
 freezing_outfit_img = "/static/images/outfit-freezing_what-to-wear_raphael-nast-unsplash.jpeg"
 warm_outfit_img = "/static/images/outfit-warm_what-to-wear_laura-chouette-unsplash.jpeg"
 hot_outfit_img = "/static/images/outfit-hot_what-to-wear_ana-itonishvili-unsplash.jpeg"
+
+# TODO  these images need to be put somewhere?
+# <img class="outfit-img" src="{{ cold_outfit_img }}" alt="Cold Outfit">
+# <img class="outfit-img" src="{{ freezing_outfit_img }}" alt="Freezing Outfit">
+# <img class="outfit-img" src="{{ warm_outfit_img }}" alt="Warm Outfit">
+# <img class="outfit-img" src="{{ freezing_outfit_img }}" alt="Freezing Outfit">
+
+
+
 #weather icon images
 rain_icon = "/static/images/icon-hot-warm-rain.png"
 hot_warm_icon = "/static/images/icon-hot-warm-day.png"
@@ -190,26 +199,35 @@ def choose_outfit_by_weather(geocode_params, api_key, geocode_url):
 #this will eventually get tucked into a function and/or put into crud and called here for tidiness sake
     temps_for_day = set()
     temps = [result["high_temp"], result["low_temp"]]
-    outfit = ''
-    icon = ''
+    
+    
     for temp in temps:
         if temp >= 80:
             temps_for_day.add('hot')
-            outfit = hot_outfit_img
-            icon = hot_warm_icon
+            
         elif temp >= 56:
             temps_for_day.add('warm')
-            outfit = warm_outfit_img
-            icon = hot_warm_icon
+            
         elif temp >= 33:
             temps_for_day.add('cold')
-            outfit = cold_outfit_img
-            icon = freezing_snow_icon
+            
         else:
             temps_for_day.add('freezing')
-            outfit = freezing_outfit_img
-            icon = freezing_snow_icon
+            
+    if 'freezing' in temps_for_day:
+        outfit_image = freezing_outfit_img
+        icon = freezing_snow_icon
+    elif 'cold' in temps_for_day:
+        outfit_image = cold_outfit_img
+        icon = freezing_snow_icon
+    elif 'warm' in temps_for_day:
+        outfit_image = warm_outfit_img
+        icon = hot_warm_icon
+    else:
+        outfit_image = hot_outfit_img
+        icon = hot_warm_icon
 
+   
     garments = {}
 
     if len(temps_for_day) == 1:
@@ -268,7 +286,7 @@ def choose_outfit_by_weather(geocode_params, api_key, geocode_url):
     #combine results with garments, icons and outfits 
     result['garments'] = garments
     result['icon'] = icon
-    result['outfit'] = outfit
+    result['outfit_image'] = outfit_image
     return result
 
 
