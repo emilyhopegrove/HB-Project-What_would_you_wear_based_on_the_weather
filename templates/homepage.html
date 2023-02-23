@@ -106,10 +106,12 @@
                 const weatherIconDisplay = document.querySelector("#icon")
 
                 //disallowing children from multiplying the images (doesn't work with 'empty strings')
-                // weatherIconDisplay = ''
-                // outfitImgDisplay = ''
+                let element = document.getElementById("weather-outfit");
+                while (element.firstChild) {
+                  element.removeChild(element.firstChild);
+                }
 
-                outfitImgDisplay.insertAdjacentHTML("beforeend", `<img src=${data.outfit_image}>`);
+                outfitImgDisplay.insertAdjacentHTML("beforeend", `<img class="outfit-img" src=${data.outfit_image}>`);
                 weatherIconDisplay.insertAdjacentHTML("beforeend", `<img src=${icon}>`);
 
             })
@@ -139,10 +141,12 @@
                 const outfitImgDisplay = document.querySelector("#weather-outfit")
                 const weatherIconDisplay = document.querySelector("#icon")
                 //disallowing children from multiplying the images (doesn't work with 'empty strings')
-                // weatherIconDisplay = ''
-                // outfitImgDisplay = ''
+                let element = document.getElementById("weather-outfit");
+                while (element.firstChild) {
+                  element.removeChild(element.firstChild);
+                }
 
-                outfitImgDisplay.insertAdjacentHTML("beforeend", `<img src=${data.outfit_image}>`);
+                outfitImgDisplay.insertAdjacentHTML("beforeend", `<img class="outfit-img" src=${data.outfit_image}>`);
                 weatherIconDisplay.insertAdjacentHTML("beforeend", `<img src=${icon}>`);
                 
                 

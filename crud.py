@@ -57,11 +57,7 @@ freezing_outfit_img = "/static/images/outfit-freezing_what-to-wear_raphael-nast-
 warm_outfit_img = "/static/images/outfit-warm_what-to-wear_laura-chouette-unsplash.jpeg"
 hot_outfit_img = "/static/images/outfit-hot_what-to-wear_ana-itonishvili-unsplash.jpeg"
 
-# TODO  these images need to be put somewhere?
-# <img class="outfit-img" src="{{ cold_outfit_img }}" alt="Cold Outfit">
-# <img class="outfit-img" src="{{ freezing_outfit_img }}" alt="Freezing Outfit">
-# <img class="outfit-img" src="{{ warm_outfit_img }}" alt="Warm Outfit">
-# <img class="outfit-img" src="{{ freezing_outfit_img }}" alt="Freezing Outfit">
+
 
 
 
