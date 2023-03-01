@@ -47,4 +47,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ![Home Zip Outfit - hot weather](Home-Zip-Hot-Outfit.png)
 ![Work Zip Outfit - cold weather](Home-Zip-Cold-Outfit.png)
 
-* ==Future features==
+* -> ==Future features==
