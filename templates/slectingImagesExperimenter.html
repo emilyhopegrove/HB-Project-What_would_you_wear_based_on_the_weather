@@ -1,0 +1,204 @@
+ <!-- outfit images -->
+cold_outfit_img = '<img src="/static/images/outfit-cold_what-to-wear_hamza-nouasria-unsplash.jpeg"  alt="Woman wearing a hoodie and leggins in cold weather" class="outfit-image">'
+freezing_outfit_img = '<img src="/static/images/outfit-freezing_what-to-wear_raphael-nast-unsplash.jpeg" alt="Woman wearing a coat, hat and scarf in freezing weather" class="outfit-image">'
+warm_outfit_img = '<img src="/static/images/outfit-warm_what-to-wear_laura-chouette-unsplash.jpeg" alt="Woman wearing jeans and a tank top in warm weather" class="outfit-image">'
+hot_outfit_img = '<img src="/static/images/outfit-hot_what-to-wear_ana-itonishvili-unsplash.jpeg" alt="Woman wearing shorts and a crop top in hot weather" class="outfit-image">'
+#weather icon images
+rain_icon = '<img src="/static/images/icon-hot-warm-rain.png" alt="Weather icon with a rain cloud" class="weather-icon">'
+hot_warm_icon = '<img src="/static/images/icon-hot-warm-day.png" alt="Weather icon with a sun" class="weather-icon">'
+freezing_snow_icon = '<img src="/static/images/icon-freezing-snow.png" alt="Weather icon with a snowflake" class="weather-icon">'
+#loading icon image
+loading_icon = '<img src="/static/images/wait-1.1s-200px.svg" alt="loading icon" class="loading">'
+
+
+def get_outfit_image(weather_condition):
+    if weather_condition == 'cold':
+        return cold_outfit_img
+    elif weather_condition == 'freezing':
+        return freezing_outfit_img
+    elif weather_condition == 'warm':
+        return warm_outfit_img
+    elif weather_condition == 'hot':
+        return hot_outfit_img
+    else:
+        return loading_icon
+ 
+def get_weather_icon(weather_condition):
+    if weather_condition == 'cold' or weather_condition == 'freezing':
+        return freezing_snow_icon
+    elif weather_condition == 'warm' or weather_condition == 'hot':
+        return hot_warm_icon
+    elif weather_condition == 'rain':
+        return rain_icon
+    else:
+        return loading_icon
+
+
+
+        possible new update account form 
+
+        <div class="clearfix">
+            <div class="password-details">
+              <!-- Update password -->
+              <form id="password-update">
+                <label for="old_password">Old Password:</label>
+                <input type="password" id="old_password" placeholder="what's your current pw?" name="old_password" class="text-field">
+                <label for="new_password">New Password:</label>
+                <input type="password" id="new_password" placeholder="update your pw" name="new_password" class="text-field">
+                <label for="confirm_password">Confirm New Password:</label>
+                <input type="password" id="confirm_password" placeholder="match your new pw" name="confirm_password" class="text-field">
+              </form>
+            </div>
+            <div class="update-account">
+              <!-- Update account details -->
+              <form id="account-details">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="text-field" id="email" placeholder="update your email" name="email">
+                </div>
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input type="text" class="text-field" id="username" placeholder="update your username" name="username">
+                </div>
+                <div class="form-group">
+                  <label for="homeZip">Home Zip</label>
+                  <input type="text" class="text-field" id="homeZip" placeholder="update your home zip" name="homeZip">
+                </div>
+                <div class="form-group">
+                  <label for="workZip">Work Zip</label>
+                  <input type="text" class="text-field" id="workZip" placeholder="update your work zip" name="workZip">
+                </div>
+                <br>
+                <div class="form-submit">
+                  <input type="submit" value="Update Account" name="Update Account" id="Update Account"/>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          ============================
+stylized form not working
+
+<!-- this page will display the user's profile information including their email, username, password, option to change
+these things and up to 3 preferred zip/locations to save their home, work and other regular location for ease of use
+The user can now check off garments they have in their wardrobe-->
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="account-title">
+  <h2>User Account</h2>
+  <p>Make updates to your user account here.</p>
+  <br>
+  </div>
+          <div class="update-account">
+
+          <form id='password-update'>
+            <div class="form-group"></div>
+              
+              <label for="old_password">Old Password:</label>
+              <input type="password" class="form-control" id="old_password" placeholder="current pw" name="old_password">
+            
+          
+            
+              <label for="new_password">New Password:</label>
+              <input type="password" class="form-control" id="new_password" placeholder="update your pw" name="new_password">
+            
+          
+              <label for="confirm_password">Confirm Password:</label>
+              <input type="password" class="form-control" id="confirm_password" placeholder="match your new pw" name="confirm_password">
+              <br>
+            </form>
+          
+              <form id="account-details"> 
+                  <label for="email">Email:</label>
+                  <input type="email" class="form-control" id="email" placeholder="update your email" name="email">
+                
+
+                
+                  <label for="username">Username:</label>
+                  <input type="text" class="form-control" id="username" placeholder="update your username" name="username">
+               
+                
+                
+                  <label for="homeZip">Home Zip:</label>
+                  <input type="text" class="form-control" id="homeZip" placeholder="update your home zip" name="homeZip">
+                
+                
+                
+                  <label for="workZip">Work Zip:</label>
+                  <input type="text" class="form-control" id="workZip" placeholder="update your work zip" name="workZip">
+                
+                
+                <div class="form-submit">
+                  <input type="submit" value="Update Account" name="Update Account" id="Update Account"/>
+                </div>
+          
+              </form>  
+            </div>
+          </div>
+        </div>
+
+<br>
+
+  <!-- garment selector form -->
+<div class="update-account">
+  <h2>What's In Your Wardrobe?</h2>
+  <br>
+  <p>Please tell us what you have in your wardrobe 
+  so we can make a customized outfit for you! <br>
+  For the description tell us the color, and type of clothing it is. <br>
+  Then tell us what type of temperature or weather condition you use it for.<br>
+  Keep in mind you can add things for your accessories like umbrellas, or  sunglasses, hats or gloves. 
+</p>
+
+
+  <h3>My Wardrobe Tracker</h3>
+
+  <form id="add-garment">
+    <p>What type of garment do you have?</p>
+    <div>
+      <label for="garment-type">Garment Type:</label>
+      <select id="garment-type" name="garment-type">
+        <option value="tops">Tops</option>
+        <option value="bottoms">Bottoms</option>
+        <option value="footwear">Footwear</option>
+        <option value="outerwear">Outerwear</option>
+        <option value="accessories">Accessories</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="garment-description">Garment Description:</label>
+      <input type="text" id="garment-description" name="garment-description" />
+    </div>
+
+    <div>
+      <p>Do you use it for hot, warm, cold or freezing weather?
+        <br>
+      </p>
+      <label for="temperature-rating">Temperature</label>
+      <select id="temperature-rating" name="temperature-rating">
+        <option value="hot">Hot</option>
+        <option value="warm">Warm</option>
+        <option value="cold">Cold</option>
+        <option value="freezing">Freezing</option>
+      </select>
+    
+    <!-- do i need to make this button just for garments? and update in the other stuff with json etc... -->
+    <br>
+      <div class="form-submit">
+
+        <input type="submit" value="Add Garment" name="Update Account" id="Update Account"/>
+      
+      </div>
+    </div>
+  </form>
+  <br>
+  <br>
+
+  <script src="/static/js.js"></script>
+  <div>
+{% endblock %}
