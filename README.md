@@ -46,5 +46,6 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ![Account Details](https://i.imgur.com/3ysMXOo.png)
 ![Home Zip Outfit - hot weather](https://i.imgur.com/HKKQNM8.png)
 ![Work Zip Outfit - cold weather](https://i.imgur.com/ohSFK94.png)
+![Wardrobe Tracker](https://i.imgur.com/sdam9BS.png)
 
 _* Future features_
