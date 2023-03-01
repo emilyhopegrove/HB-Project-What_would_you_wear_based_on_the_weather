@@ -1,31 +1,17 @@
-#What to Wear Based On The Weather#
-A simple app that helps you determine what to wear based on the weather at your home and work locations.
-Tired of looking outside and thinking it's sunny so it must be warm only to find out upon stepping outside 
-that it's actually quite chilly? Or vice versa? Here's the app for you.
+Demo Video: https://youtu.be/FJjJjRQxAVw
 
-##Features##
-Display the current weather conditions at both your home and work locations based on zip code.
-Recommend a weather appropriate outfit based on the current weather conditions.
 
-*Option to select your preferred style of clothing, such as business casual or casual, sporty, or formal, 
-favorite outfits, customized to your actual existing wardrobe, and a randomizer so you never wear the same clothes 2 days in a row. 
-You'll even be able to be 'warm-blooded' or 'cold-blooded' so if you're the person who almost always wears shorts even when it's cold,
-or you wear jeans even in 100 degree weather, we've got you covered. 
 
-##Technical Details##
-This app uses an API from (https://home.openweathermap.org/, "OpenWeatherMap") to retrieve current weather data for your location/s.
-The app is built using Flask, Bootstrap, Jinja, PostgreSQL,  Python, JavaScript (AJAX, JSON), HTML, and CSS
-*The weather data is displayed using the Weather Icons library. Outfits are displayed using images from Unsplash
+What to wear based on the weather is a simple to use app that allows the user to quickly see some suggestions for outfits to wear based on their local weather conditions. 
 
-##Usage##
-1. Create an account and enter your home zip code, email, username and password, and optional work and another preferred zip code.
-2. *Select your preferred style of clothing.
-3. View the current weather conditions and recommended outfit.
+The inspiration for this project was Emily simply solving her own problem – never knowing what to wear one day to the next with the wild weather swings in Texas. 
 
-##Contributing##
-If you'd like to contribute to this project, please fork the repository and submit a pull request. Your contributions are greatly appreciated!
+All the user has to do is create their account including their zip code/s for their home and work areas, they add in garments to their profile and the algorithm does the rest! 
 
-##License##
-This project is licensed under the MIT License. See the LICENSE file for details.
+This app is destined to hit the app stores for you to use on your phone in the future. It will have new features including a random outfit generator, a save my favorite outfit function, and one day a chance to upload images of your own clothes so you can get really personalized suggestions for what to wear based on your local weather conditions. 
 
-*Future features
+Tech stack
+Python, Flask, Javascript, JQuery, PostgreSQL, SQLAlchemy, AJAX, Jinja2, Bootstrap, HTML, CSS
+
+APIs Used:
+Openweathermap.org
