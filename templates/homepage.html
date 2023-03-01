@@ -29,18 +29,15 @@
 
       <div class="row-10">
         <span id="temperature" class="col-6"></span>
-          <img src="static/images/icon-freezing-snow.png" class='weather-icon col-6'>
+          <!-- <img src="static/images/icon-freezing-snow.png" class='weather-icon col-6'> -->
       </div>
 
-    <h4>Your Outfit Suggestion:</h4><br>
-    <ul id="garments">
+    <h3>Your Outfit Suggestion:</h3><br>
+    <ul class="no-bullet" id="garments">
     </ul>
 
   </div>
-  <!-- loading image use as default / space holder -->
-  <!-- <section id="loading">
-      <img src="static/images/wait-1.1s-200px.svg"> 
-  </section> -->
+  
 
   
 </div>
@@ -49,35 +46,12 @@
   </section>
 </div>
   <script>
-    //THIS FUNCTION DOES NOT APPEAR TO BE WORKING/NEEDED
-    // function displayWeatherData(zipCode, temperature, garments) {
-    //   //alert('hey!!!!!!!!!!!')
-    //   document.querySelector('#zipCode').innerHTML = `Today's forecast for your ${zipCode}:`;
-    //   document.querySelector('#temperature').innerHTML = `The temp is: ${temperature}`;
-    //   //update outfit image 
-    //   document.querySelector('#weather-outfit img')
-    //           .setAttribute('src', '')
-    //   //update weather icon image
-    //   document.querySelector('#weather-icon img')
-    //           .setAttribute('src', '')        
-    //   //need another querySelector to put in the images
-    //   // .querySelector('#shark-img img')
-    //   //     .setAttribute('src', `/static/images/guess${numWrong}.png`);
-
-    //   let garmentList = "";
-    //   for (const garment of garments) {
-    //     garmentList += `<li>${garment}</li>`;
-    //   }
-    //   document.querySelector('#garments').innerHTML = garmentList;
-    // }
-
-    //add getweatherdata to airbnb application. put this on to the homepage and make the homepage work
-//   create a function that allows the user to toggle between work and home zip code weather data and corresponding outfits
+   
     
     function getWeatherData(zipCode) {
-      /*create a function that allows the user to toggle between work and home zip codes without reloading 
-       by using AJAX to display weather data and corresponding outfits. 
-       Weather data is gathered using an API call.*/
+      /*create a function that allows the user to toggle between work and home zip codes 
+      without reloading by using AJAX to display weather data and corresponding outfits. 
+      Weather data is gathered using an API call.*/
   
       displayWeatherData(zipCode, responseData.temperature, responseData.garments);
     }
@@ -112,7 +86,7 @@
                 }
 
                 outfitImgDisplay.insertAdjacentHTML("beforeend", `<img class="outfit-img" src=${data.outfit_image}>`);
-                weatherIconDisplay.insertAdjacentHTML("beforeend", `<img src=${icon}>`);
+                weatherIconDisplay.insertAdjacentHTML("beforeend", `<img class='icon' src=${data.icon[icon]}>`);
 
             })
             .catch(error => {
@@ -147,7 +121,7 @@
                 }
 
                 outfitImgDisplay.insertAdjacentHTML("beforeend", `<img class="outfit-img" src=${data.outfit_image}>`);
-                weatherIconDisplay.insertAdjacentHTML("beforeend", `<img src=${icon}>`);
+                weatherIconDisplay.insertAdjacentHTML("beforeend", `<img class="icon" src=${data.icon[icon]}>`);
                 
                 
               })
