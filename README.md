@@ -41,10 +41,10 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Screenshots
 ![Homepage](https://i.imgur.com/Clfa8qt.png)
-![Sign up](Signup-Mobile.png)
-![Login](Login.png)
-![Account Details](User-Account-Mobile.png)
-![Home Zip Outfit - hot weather](Home-Zip-Hot-Outfit.png)
-![Work Zip Outfit - cold weather](Home-Zip-Cold-Outfit.png)
+![Sign up](https://i.imgur.com/EN56R7C.png)
+![Login](https://i.imgur.com/ZejgLK9.png)
+![Account Details](https://i.imgur.com/3ysMXOo.png)
+![Home Zip Outfit - hot weather](https://i.imgur.com/HKKQNM8.png)
+![Work Zip Outfit - cold weather](https://i.imgur.com/ohSFK94.png)
 
 _* Future features_
