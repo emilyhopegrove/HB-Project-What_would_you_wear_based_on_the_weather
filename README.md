@@ -40,7 +40,7 @@ If you'd like to contribute to this project, please fork the repository and subm
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Screenshots
-![Homepage](Homepage.png)
+![Homepage](/Users/emilygrove/src/HB_Project_What-to-wear-for-weather/static/Screenshot Images/Homepage.png)
 ![Sign up](Signup-Mobile.png)
 ![Login](Login.png)
 ![Account Details](User-Account-Mobile.png)
