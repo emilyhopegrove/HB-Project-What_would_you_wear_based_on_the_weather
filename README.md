@@ -1,4 +1,4 @@
-[Demo Video] (https://youtu.be/FJjJjRQxAVw)
+[Demo Video](https://youtu.be/FJjJjRQxAVw)
 
 # What to Wear Based On The Weather
 
@@ -21,7 +21,7 @@ You'll even be able to be 'warm-blooded' or 'cold-blooded' so if you're the pers
 Need to pack for a trip with multiple stops in different climates, for various occasions? We'll have you covered. * 
 
 ## Technical Details
-This app uses an API from (https://home.openweathermap.org/, "OpenWeatherMap") to retrieve current weather data for your location/s.
+This app uses an API from [OpenWeatherMap](https://home.openweathermap.org/) to retrieve current weather data for your location/s.
 The app is built using Flask, Bootstrap, Jinja, PostgreSQL,  Python, JavaScript (AJAX, JSON), HTML, and CSS
 
 The weather data is displayed using the Weather Icons library.* 
@@ -40,11 +40,11 @@ If you'd like to contribute to this project, please fork the repository and subm
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Screenshots
-![Homepage](static/Screenshot Images/Homepage.png)
-![Sign up](static/Screenshot Images/Signup-Mobile.png)
-![Login](static/Screenshot Images/Login.png)
-![Account Details](static/Screenshot Images/User-Account-Mobile.png)
-![Home Zip Outfit - hot weather](static/Screenshot Images/Home-Zip-Hot-Outfit.png)
-![Work Zip Outfit - cold weather](static/Screenshot Images/Home-Zip-Cold-Outfit.png)
+![Homepage](Homepage.png)
+![Sign up](Signup-Mobile.png)
+![Login](Login.png)
+![Account Details](User-Account-Mobile.png)
+![Home Zip Outfit - hot weather](Home-Zip-Hot-Outfit.png)
+![Work Zip Outfit - cold weather](Home-Zip-Cold-Outfit.png)
 
 * ==Future features==
