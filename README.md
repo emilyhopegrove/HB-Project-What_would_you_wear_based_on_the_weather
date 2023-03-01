@@ -40,12 +40,26 @@ If you'd like to contribute to this project, please fork the repository and subm
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Screenshots
+### Homepage
 ![Homepage](https://i.imgur.com/Clfa8qt.png)
+
+### Sign-up Page
 ![Sign up](https://i.imgur.com/EN56R7C.png)
+
+### Login Page
 ![Login](https://i.imgur.com/ZejgLK9.png)
+
+### Account Details Page
 ![Account Details](https://i.imgur.com/3ysMXOo.png)
-![Home Zip Outfit - hot weather](https://i.imgur.com/HKKQNM8.png)
-![Work Zip Outfit - cold weather](https://i.imgur.com/ohSFK94.png)
+
+### Wardrobe Tracker
 ![Wardrobe Tracker](https://i.imgur.com/sdam9BS.png)
+
+### Hot Outfit Example 
+![Home Zip Outfit - hot weather](https://i.imgur.com/HKKQNM8.png)
+
+### Cold Outfit Example
+![Work Zip Outfit - cold weather](https://i.imgur.com/ohSFK94.png)
+
 
 _* Future features_
